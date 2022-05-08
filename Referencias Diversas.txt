@@ -1,0 +1,1 @@
+https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework60.html

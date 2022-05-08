@@ -1,4 +1,6 @@
-﻿namespace Modelo_FeiraLivre
+﻿using System;
+
+namespace Modelo_FeiraLivre
 {
     public class FeiraModel
     {
@@ -39,6 +41,11 @@
             NUMERO = nUMERO ?? throw new ArgumentNullException(nameof(nUMERO));
             BAIRRO = bAIRRO ?? throw new ArgumentNullException(nameof(bAIRRO));
             REFERENCIA = rEFERENCIA ?? throw new ArgumentNullException(nameof(rEFERENCIA));
+        }
+        public string transformarParaInsert()
+        {
+            return string.Concat("(",ID, ",'", LONG, "','", LAT, "','", SETCENS, "','", AREAP, "','", CODDIST, "','", DISTRITO, "','", CODSUBPREF,
+                "','", SUBPREFE, "','", REGIAO5, "','", REGIAO8, "','", NOME_FEIRA, "','", REGISTRO, "','", LOGRADOURO, "','", NUMERO, "','", BAIRRO, "','", REFERENCIA,"')");
         }
     }
 }
