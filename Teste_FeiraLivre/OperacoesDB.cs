@@ -65,7 +65,7 @@ namespace Teste_FeiraLivre
                     context.Inserir(model);
                     Assert.IsFalse(true, "Não deveria deixar inserir duas feiras com mesmo ID");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Assert.IsFalse(false);
                 }
@@ -178,7 +178,7 @@ namespace Teste_FeiraLivre
 
                     Assert.IsTrue(context.BuscaPorRegistro("abc") != null);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Assert.IsFalse(false);
                 }

@@ -19,5 +19,6 @@ CREATE TABLE Feiras(
        BAIRRO varchar(255),
    REFERENCIA varchar(255)
 );
+use Unico;
 drop table Feiras;
 select * from feiras;

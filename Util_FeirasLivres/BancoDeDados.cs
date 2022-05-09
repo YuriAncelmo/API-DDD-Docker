@@ -33,7 +33,7 @@ namespace Util_FeirasLivres
 
             modelBuilder.Entity<FeiraModel>(entity =>
             {
-                entity.HasKey(e => e.registro);
+                entity.HasKey(e =>   e.registro);
                 entity.Property(e => e.id);
                 entity.Property(e => e.numero).IsRequired();//Não há nenhum tipo de especificação se os dados são obrigatórios, porém , deixarei apenas o nome da feira e o endereco 
                 entity.Property(e => e.subprefe);
@@ -56,7 +56,7 @@ namespace Util_FeirasLivres
 
 
         }
-        public void Inserir(FeiraModel feira)
+        public int Inserir(FeiraModel feira)
         {
             //Garante que a base está criada
             this.Database.EnsureCreated();
@@ -64,9 +64,9 @@ namespace Util_FeirasLivres
             this.Feiras.Add(feira);
             try
             {
-                this.SaveChanges();
+                return this.SaveChanges();
             }
-            catch
+            catch(Exception)
             {
                 throw;
             }
@@ -94,17 +94,43 @@ namespace Util_FeirasLivres
                 this.SaveChanges();
                 this.Entry(feira).State = Microsoft.EntityFrameworkCore.EntityState.Detached;//Necessário pois foi feito uma operação de inserção e depois remoção na sequencia
             }
-            catch { throw; }
+            catch(Exception) { throw; }
         }
-        public void Alterar(FeiraModel feira)
+        public int Alterar(FeiraModel feira)
         {
             try
             {
-                this.Entry(feira).Property(c => c.registro).IsModified = false;
-                this.Feiras.Update(feira);
-                this.SaveChanges();
+                var entity = this.Feiras.SingleOrDefault(o => o.registro == feira.registro);
+                //entity.registro = feira.registro; Não deve ter alteração 
+                if (entity == null)
+                    return 0;
+                entity.id = feira.id;
+                entity.numero = feira.numero;
+                entity.subprefe = feira.subprefe;
+                entity.areap = feira.areap;
+                entity.bairro = feira.bairro;
+                entity.coddist = feira.coddist;
+                entity.codsubpref = feira.codsubpref;
+                entity.distrito = feira.distrito;
+                entity.latitude = feira.latitude;
+                entity.logradouro = feira.logradouro;
+                entity.longitude = feira.longitude;
+                entity.nome_feira = feira.nome_feira;
+                entity.numero = feira.numero;
+
+                entity.referencia = feira.referencia;
+                entity.regiao5 = feira.regiao5;
+                entity.regiao8 = feira.regiao8;
+                entity.setcens = feira.setcens;
+                entity.subprefe  = feira.subprefe;
+
+                this.Entry(entity).Property(c => c.registro).IsModified = false;//Duplo check para não alterar mesmo a chave, apesar de o entity já fazer este trabalho 
+                //this.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Detached;//Necessário pois foi feito uma operação de inserção e depois remoção na sequencia
+
+                this.Feiras.Update(entity);
+                return this.SaveChanges();
             }
-            catch { throw; }
+            catch (Exception){ throw; }
         }
         public FeiraModel BuscaPorRegistro(string codigo_registro)
         {
@@ -119,9 +145,9 @@ namespace Util_FeirasLivres
             catch
             {
                 throw;
-            }
+            }   
         }
-        public FeiraModel BuscaPorDistrito(string distrito)
+        public List<FeiraModel> BuscaPorDistrito(string distrito)
         {
             try
             {
@@ -129,29 +155,29 @@ namespace Util_FeirasLivres
                                   where feira.distrito == distrito
                                   select feira;
 
-                return feira_Model.FirstOrDefault<FeiraModel>();
+                return feira_Model.ToList<FeiraModel>();
             }
             catch
             {
                 throw;
             }
         }
-        public FeiraModel BuscaPorRegiao5(string regiao5)
+        public List<FeiraModel> BuscaPorRegiao5(string regiao5)
         {
             try
             {
                 var feira_Model = from feira in this.Feiras
-                                  where feira.regiao5  == regiao5
+                                  where feira.regiao5 == regiao5
                                   select feira;
 
-                return feira_Model.FirstOrDefault<FeiraModel>();
+                return feira_Model.ToList<FeiraModel>();
             }
             catch
             {
                 throw;
             }
         }
-        public FeiraModel BuscaPorNomeFeira(string nome_feira)
+        public List<FeiraModel> BuscaPorNomeFeira(string nome_feira)
         {
             try
             {
@@ -159,14 +185,14 @@ namespace Util_FeirasLivres
                                   where feira.nome_feira == nome_feira
                                   select feira;
 
-                return feira_Model.FirstOrDefault<FeiraModel>();
+                return feira_Model.ToList<FeiraModel>();
             }
             catch
             {
                 throw;
             }
         }
-        public FeiraModel BuscaPorBairro(string bairro)
+        public List<FeiraModel> BuscaPorBairro(string bairro)
         {
             try
             {
@@ -174,7 +200,7 @@ namespace Util_FeirasLivres
                                   where feira.bairro == bairro
                                   select feira;
 
-                return feira_Model.FirstOrDefault<FeiraModel>();
+                return feira_Model.ToList<FeiraModel>();
             }
             catch
             {
