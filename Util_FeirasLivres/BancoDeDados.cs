@@ -37,7 +37,6 @@ namespace Util_FeirasLivres
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            //optionsBuilder.UseMySQL("server=localhost;database=Unico;user=root;password=admin123");//Configurando para usar MySQL
             DirectoryInfo info = VisualStudioProvider.TryGetSolutionDirectoryInfo();
             
             StringConexao stringConexao = JsonConvert.DeserializeObject<StringConexao>(File.ReadAllText(info.FullName+"/StringConexao.json"));
@@ -242,6 +241,11 @@ namespace Util_FeirasLivres
     }
     public static class VisualStudioProvider
     {
+        /// <summary>
+        /// Busca a raiz da solução
+        /// </summary>
+        /// <param name="currentPath"></param>
+        /// <returns></returns>
         public static DirectoryInfo TryGetSolutionDirectoryInfo(string currentPath = null)
         {
             var directory = new DirectoryInfo(

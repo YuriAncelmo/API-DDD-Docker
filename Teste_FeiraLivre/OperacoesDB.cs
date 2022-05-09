@@ -2,12 +2,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Modelo_FeiraLivre;
 using System;
 using Util_FeirasLivres;
-
 namespace Teste_FeiraLivre
 {
     [TestClass]
     public class OperacoesDB
     {
+       
         [TestMethod]
         public void CadastroNovaFeira()
         {
