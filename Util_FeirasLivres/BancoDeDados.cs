@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Configuration;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Util_FeirasLivres
 {
@@ -23,9 +26,27 @@ namespace Util_FeirasLivres
         }
 
         public DbSet<FeiraModel> Feiras { get; set; }
+        private struct StringConexao
+        {
+            public string server { get; set; }
+            public string port { get; set; }
+            public string database { get; set; }
+            public string uid { get; set; }
+            public string password { get; set; }
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=Unico;user=root;password=admin123");//Configurando para usar MySQL
+
+            //optionsBuilder.UseMySQL("server=localhost;database=Unico;user=root;password=admin123");//Configurando para usar MySQL
+            DirectoryInfo info = VisualStudioProvider.TryGetSolutionDirectoryInfo();
+            
+            StringConexao stringConexao = JsonConvert.DeserializeObject<StringConexao>(File.ReadAllText(info.FullName+"/StringConexao.json"));
+            optionsBuilder.UseMySQL(string.Format("server={0};port={1};database={2};uid={3};password={4}"
+                                ,stringConexao.server
+                                ,stringConexao.port
+                                ,stringConexao.database
+                                ,stringConexao.uid
+                                ,stringConexao.password));//Configurando para usar MySQL
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,10 +54,10 @@ namespace Util_FeirasLivres
 
             modelBuilder.Entity<FeiraModel>(entity =>
             {
-                entity.HasKey(e =>   e.registro);
+                entity.HasKey(e => e.registro);
                 entity.Property(e => e.id);
                 entity.Property(e => e.numero).IsRequired();//Não há nenhum tipo de especificação se os dados são obrigatórios, porém , deixarei apenas o nome da feira e o endereco 
-                entity.Property(e => e.subprefe);
+            entity.Property(e => e.subprefe);
                 entity.Property(e => e.areap);
                 entity.Property(e => e.bairro).IsRequired();
                 entity.Property(e => e.coddist);
@@ -66,7 +87,7 @@ namespace Util_FeirasLivres
             {
                 return this.SaveChanges();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }
@@ -94,7 +115,7 @@ namespace Util_FeirasLivres
                 this.SaveChanges();
                 this.Entry(feira).State = Microsoft.EntityFrameworkCore.EntityState.Detached;//Necessário pois foi feito uma operação de inserção e depois remoção na sequencia
             }
-            catch(Exception) { throw; }
+            catch (Exception) { throw; }
         }
         public int Alterar(FeiraModel feira)
         {
@@ -122,15 +143,15 @@ namespace Util_FeirasLivres
                 entity.regiao5 = feira.regiao5;
                 entity.regiao8 = feira.regiao8;
                 entity.setcens = feira.setcens;
-                entity.subprefe  = feira.subprefe;
+                entity.subprefe = feira.subprefe;
 
                 this.Entry(entity).Property(c => c.registro).IsModified = false;//Duplo check para não alterar mesmo a chave, apesar de o entity já fazer este trabalho 
-                //this.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Detached;//Necessário pois foi feito uma operação de inserção e depois remoção na sequencia
+                                                                                //this.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Detached;//Necessário pois foi feito uma operação de inserção e depois remoção na sequencia
 
                 this.Feiras.Update(entity);
                 return this.SaveChanges();
             }
-            catch (Exception){ throw; }
+            catch (Exception) { throw; }
         }
         public FeiraModel BuscaPorRegistro(string codigo_registro)
         {
@@ -145,7 +166,7 @@ namespace Util_FeirasLivres
             catch
             {
                 throw;
-            }   
+            }
         }
         public List<FeiraModel> BuscaPorDistrito(string distrito)
         {
@@ -218,5 +239,18 @@ namespace Util_FeirasLivres
 
         }
 
+    }
+    public static class VisualStudioProvider
+    {
+        public static DirectoryInfo TryGetSolutionDirectoryInfo(string currentPath = null)
+        {
+            var directory = new DirectoryInfo(
+                currentPath ?? Directory.GetCurrentDirectory());
+            while (directory != null && !directory.GetFiles("*.sln").Any())
+            {
+                directory = directory.Parent;
+            }
+            return directory;
+        }
     }
 }

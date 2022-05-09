@@ -1,4 +1,3 @@
-https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework60.html
 
 Este software teste foi realizado com muito carinho e empenho!
 
@@ -6,9 +5,9 @@ Primeiro de tudo, vamos preparar o ambiente.
 
 Há disponível nesta suit, um utilitário para te ajudar a importar os dados pré-existentes de uma das bases de dados que estão disponíveis.
 
-Este utilitário está disponível, na raiz deste projeto , na pasta utilitario, com o nome de Utilitario.exe, lembre-se de seguir todas as instruções presentes 
+Este utilitário está disponível, na raiz deste projeto, na pasta utilitario, com o nome de Utilitario.exe, lembre-se de seguir todas as instruções presentes 
 
-Apos a importação da base de dados para o MySQL e com este já rodando, você pode rodar a API e começar a fazer requests 
+Após a importação da base de dados para o MySQL e com este já rodando, você pode rodar a API e começar a fazer requests 
 
 As requisições para api de feiras ficam no seguinte formato 
 https://localhost:44365/feira/distrito/liberdade

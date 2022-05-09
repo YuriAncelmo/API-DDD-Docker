@@ -108,7 +108,7 @@ namespace Utilitario_FeirasLivresSP
             Console.WriteLine("Deixa eu tentar conectar com o banco de dados, me dá um minuto.");
 
 
-            EscrevaComEfeito("Caso você queira se conectar com um banco de dados especifico em seu servidor, altere a string de conexão disponível neste software dentro do arquivo appsettings, presente na mesma pasta que este software");
+            EscrevaComEfeito("Caso você queira se conectar com um banco de dados especifico em seu servidor, altere a string de conexão disponível neste software dentro do arquivo \"StringConexao.json\" na raiz do repositório, presente na mesma pasta que este software");
             EscrevaComEfeito("Eu estou usando o usuario root e senha admin123, as configurações de comunicação com banco de dados, podem ser ajustados no arquivo, na variável com nome MySQL dentro da chave ConnectionStrings");
             EscrevaComEfeito("Estou testando a conexão com o banco agora ...");
 
