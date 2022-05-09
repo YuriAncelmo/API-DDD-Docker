@@ -6,88 +6,72 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Util_FeirasLivres
 {
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
-    public class BancoDeDadosContext:DbContext
+    public class BancoDeDadosContext : DbContext
     {
         public DbSet<FeiraModel> Feiras { get; set; }
-        protected override void OnConfiguring(DbContextOptions<BancoDeDadosContext> optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseMySQL("server=localhost;database=Unico;user=root;password=admin123");//Configurando para usar MySQL
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-            optionsBuilder.Use(
-                @"Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True");
-        }
-        private MySqlConnection Conectar()
-        {
-            MySqlConnection connection = new MySqlConnection();
-            connection.ConnectionString = "Server=localhost; Port=3306; Database=Unico; Uid=root; Pwd=admin123;";
-            try
+            modelBuilder.Entity<FeiraModel>(entity =>
             {
-                connection.Open();
-                return connection;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Teve um problema na conexão com banco de dados ... É melhor você reiniciar o aplicativo quando resolver este problema. Detalhes: " + ex.Message);
-                return null;
-            }
-        }
-        public bool CriarTabela()
-        {
-            using (MySqlConnection connection = Conectar())
-                try
-                {
-                    MySqlCommand criacaoTabela = new MySqlCommand(
-                        "use Unico;" +
-                        "CREATE TABLE Feiras(           " +
-                        "           ID int,             " +
-                        "    LONGITUDE varchar(50),     " +
-                        "     LATITUDE varchar(50),     " +
-                        "      SETCENS varchar(255),    " +
-                        "        AREAP varchar(255),    " +
-                        "      CODDIST varchar(255),    " +
-                        "     DISTRITO varchar(255),    " +
-                        "   CODSUBPREF varchar(255),    " +
-                        "     SUBPREFE varchar(255),    " +
-                        "      REGIAO5 varchar(255),    " +
-                        "      REGIAO8 varchar(255),    " +
-                        "   NOME_FEIRA varchar(255),    " +
-                        "     REGISTRO varchar(255),    " +
-                        "   LOGRADOURO varchar(255),    " +
-                        "       NUMERO varchar(255),    " +
-                        "       BAIRRO varchar(255),    " +
-                        "   REFERENCIA varchar(255)     " +
-                        "); ", connection);
-                    criacaoTabela.ExecuteNonQuery();
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-        }
+                entity.HasKey(e => e.id);
+                entity.Property(e => e.numero).IsRequired();//Não há nenhum tipo de especificação se os dados são obrigatórios, porém , deixarei apenas o nome da feira e o endereco 
+                entity.Property(e => e.subprefe);
+                entity.Property(e => e.areap);
+                entity.Property(e => e.bairro).IsRequired();
+                entity.Property(e => e.coddist);
+                entity.Property(e => e.codsubpref);
+                entity.Property(e => e.distrito);
+                entity.Property(e => e.latitude).IsRequired();
+                entity.Property(e => e.logradouro);
+                entity.Property(e => e.longitude).IsRequired();
+                entity.Property(e => e.nome_feira).IsRequired();
+                entity.Property(e => e.numero).IsRequired();
+                entity.Property(e => e.referencia);
+                entity.Property(e => e.regiao5);
+                entity.Property(e => e.regiao8);
+                entity.Property(e => e.setcens);
+                entity.Property(e => e.subprefe);
+            });
 
-        public void InserirRegistros(List<FeiraModel> linhas)
+        }
+        public void Alterar(FeiraModel feira)
         {
-            string query = "INSERT INTO FEIRAS (ID,LONGITUDE,LATITUDE,SETCENS,AREAP,CODDIST,DISTRITO,CODSUBPREF,SUBPREFE,REGIAO5,REGIAO8,NOME_FEIRA,REGISTRO,LOGRADOURO,NUMERO,BAIRRO,REFERENCIA) ";
-            query  += "VALUES ";
-            for(int i = 0;i<linhas.Count;i++ )
+            using (var context= this)
             {
-                query += linhas[i].transformarParaInsert();
-                if (i == linhas.Count - 1)//Ultimo registro
-                    query += ";";
-                else
-                    query += ",";
+                context.Feiras.Update(feira);
             }
-            using (MySqlConnection connection = Conectar())
+        }
+        public void Inserir(FeiraModel feira)
+        {
+            //TODO: Tratar erros de duplicação de dados 
+            using (var context = this)
             {
-                MySqlCommand command = new MySqlCommand(query,connection);
-                command.ExecuteNonQuery();
+                //Garante que a base está criada
+                context.Database.EnsureCreated();
+
+                context.Feiras.Add(feira);
+
+                context.SaveChanges();
+            }
+        }
+        public void InserirLote(List<FeiraModel> feiras)
+        {
+            using (var context = this)
+            {
+                //Garante que a base está criada
+                context.Database.EnsureCreated();
+
+                feiras.ForEach(feira => context.Feiras.Add(feira));
+
+                context.SaveChanges();
             }
         }
 
-        public void ContarRegistros()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

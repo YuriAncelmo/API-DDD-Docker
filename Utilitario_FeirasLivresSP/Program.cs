@@ -7,6 +7,8 @@ using MySql.Data.MySqlClient;
 using Util_FeirasLivres;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Linq;
+using System.Threading;
 
 namespace Utilitario_FeirasLivresSP
 {
@@ -25,10 +27,15 @@ namespace Utilitario_FeirasLivresSP
 
         private static void RotinaInsercaoBancoDeDados(List<FeiraModel> feiras)
         {
-            EscrevaComEfeito("Eu utilizei como base para configuração, o vídeo desta pessoa https://www.youtube.com/watch?v=OUZIaoCSJas.");
-
-            EscrevaComEfeito("Então fiz da seguinte forma, abri o MySQL Installer, e na opção MySQL Server, cliquei em \"Reconfigure\".");
+            EscrevaComEfeito("Para fazer a configuração do banco de dados, realizei o download em https://dev.mysql.com/downloads/file/?id=511553");
+            EscrevaComEfeito("Caso não tenha, baixe a versão para desenvolvedor.");
             EscrevaComEfeito("Eu configurei da forma mais básica possível, dado que nosso intuito aqui não é focar apenas na base de dados.");
+            EscrevaComEfeito("Se você já estiver instalado o MySQL aperte enter, se não, vai demorar um pouquinho pra instalar... vá tomar um café enquanto espera, depois volte aqui (: (Não esqueça de dar um enter quando estiver tudo OK.)");
+            Console.Read();
+            EscrevaComEfeito("Estou utilizando para fazer acesso ao banco de dados , a biblioteca MySql.Data.MySqlClient .Net Core Class Library, versão 8.0.29, e também o Entity Framework 6.0.1, eles são ótimas bibliotecas para facilitar a junção de back-ends e bancos de dados");
+
+            Console.WriteLine("Deixa eu tentar conectar com o banco de dados, me dá um minuto.");
+
 
             EscrevaComEfeito("Caso você queira se conectar com um banco de dados especifico em seu servidor, altere a string de conexão disponível neste software dentro do arquivo appsettings, presente na mesma pasta que este software");
             EscrevaComEfeito("Eu estou usando o usuario root e senha admin123, as configurações de comunicação com banco de dados, podem ser ajustados no arquivo, na variável com nome MySQL dentro da chave ConnectionStrings");
@@ -38,59 +45,28 @@ namespace Utilitario_FeirasLivresSP
 
             //EscrevaComEfeito("Durante o desenvolvimento recebi um erro dizendo \"Unable to connect to any specified mysql host\" e encontrei a resposta dizendo que a minha string de conexão estava com uma ordem equivocada");
             //EscrevaComEfeito("Se você receber o mesmo erro, veja o que encontrei neste forum do StackOverFlow https://stackoverflow.com/questions/17993657/unable-to-connect-to-any-of-the-specified-mysql-hosts-c-sharp-mysql");
-
+            EscrevaComEfeito("Obrigado por utilizar este utilitário, espero que tenha sido útil ;)");
 
         }
 
         private static void OperacoesBanco(List<FeiraModel> feiras)
         {
 
-            BancoDeDados db = new BancoDeDados();
-            EscrevaComEfeito("Você já tem a tabela criada?");
-            EscreverOpcao(1, "Não");
-            EscreverOpcao(2, "Sim");
-            int opcao = LerOpcao();
-            if (opcao == 1)
+            using (BancoDeDadosContext db = new BancoDeDadosContext())
             {
-                EscrevaComEfeito("Você quer que eu crie pra você?");
-                EscreverOpcao(1, "Sim");
-                EscreverOpcao(2, "Não");
-                opcao = LerOpcao();
-                if (opcao == 2)
-                {
-                    EscrevaComEfeito("Já que você não quer que eu crie, então você pode pegar o script que criei na mão, que está na pasta do projeto, chamado \"scriptcriacao.sql\", depois que criar , tecle enter.");
-                    Console.Read();
-                }
-                else
-                {
-                    try
-                    {
-                        db = new BancoDeDados();
-                        db.CriarTabela();
-                        EscrevaComEfeito("Olha só, consegui criar a tabela!");
-                    }
-                    catch (Exception ex)
-                    {
-                        EscrevaComEfeito("Eita.. tentei criar a tabela Feira, na base de dados Unico e deu o erro " + ex.Message + " por favor , analise e reinicie o aplicativo para continuar");
-                    }
+                //EscrevaComEfeito("Como você já tem o banco de dados, eu vou assumir que você já tem a tabela criada. Se não estiver criada, deixa comigo que já resolvo isto também.");
+                EscrevaComEfeito("Beleza, então acho que agora dá pra inserir os registros do arquivo na base de dados :)");
+                //EscrevaComEfeito("Eu vi alguns foruns sobre inserção multipla de valores no MySQL, e vendo neste aqui https://www.mysqltutorial.org/mysql-insert-multiple-rows/, tomei uma decisão.");
 
-                }
+                //EscrevaComEfeito("Eu havia criado um modelo para fazer a ingestão dos dados, e posteriormente construiria a logica para comunicação com banco de dados, porém, para longevidade e facilidade de manutenção dese aplicativo, vou usar o Entity Framwork Core.");
+                EscrevaComEfeito("No caso do nosso banco de dados, eu utilizei o Entity Framework Core, e usei como base a documentação -> https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework-core.html");
+                db.InserirLote(feiras);
+                Console.Clear();
+                
             }
-            EscrevaComEfeito("Beleza, então acho que agora dá pra inserir os registros do arquivo :)");
-            EscrevaComEfeito("Eu vi alguns foruns sobre inserção multipla de valores no MySQL, e vendo neste aqui https://www.mysqltutorial.org/mysql-insert-multiple-rows/, tomei uma decisão.");
+            using (BancoDeDadosContext db = new BancoDeDadosContext())
+                EscrevaComEfeito(String.Format("Deu certo!. Foram inseridos {0} registros,e a quantidade total de registros no banco é de {1}", feiras.Count, db.Feiras.Count()));
 
-            EscrevaComEfeito("Eu havia criado um modelo para fazer a ingestão dos dados, e posteriormente construiria a logica para comunicação com banco de dados, porém, para longevidade e facilidade de manutenção dese aplicativo, vou usar o Entity Framwork Core.");
-            EscrevaComEfeito("No caso do nosso banco de dados, o entity é uma implementação do time do mysql, não necessariamente da Microsoft, e neste link eu consegui toda a documentação https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework60.html")
-            EscrevaComEfeito("Chega de conversa, me da um segundo que vou inserir os registros na tabela.");
-            db.InserirRegistros(feiras);
-            Console.Clear();
-            EscrevaComEfeito("Certinho então. Quer saber quantos registros existem no banco de dados?");
-            EscreverOpcao(1, "Não precisa, obrigado!");
-            EscreverOpcao(2, "Sim, por favor!");
-            if (LerOpcao() == 2)
-            {
-                db.ContarRegistros();
-            }
         }
 
         private static List<FeiraModel> RotinaIngestaoArquivo(string BancoDeDados)
@@ -120,14 +96,7 @@ namespace Utilitario_FeirasLivresSP
 
                 EscrevaComEfeito("Enquanto você lê essa mensagem, eu já estou importando os dados a memória.");
                 feiras = LerCSV(localExecucaoAssembly + estruturaPastas + nomeArquivo);
-                EscrevaComEfeito("Para fazer a configuração deste banco de dados, realizei o download em https://dev.mysql.com/downloads/file/?id=511553");
-                EscrevaComEfeito("Baixe a versão para desenvolvedor, padrão.");
-                EscrevaComEfeito("Vai demorar um pouquinho pra instalar... vá tomar um café enquanto espera, depois volte aqui (: (Não esqueça de dar um enter quando estiver tudo OK.)");
-                Console.Read();
-                EscrevaComEfeito("Estou utilizando para fazer acesso ao banco de dados , a biblioteca MySql.Data.MySqlClient .Net Core Class Library, versão 8.0.29");
-
-                Console.WriteLine("Deixa eu tentar conectar com o banco de dados, me dá um minuto.");
-
+                
 
             }
             else
@@ -238,12 +207,12 @@ namespace Utilitario_FeirasLivresSP
             for (int i = 0; i < s.Length; i++)
             {
                 Console.Write(s[i]);
-#if !DEBUG
+#if DEBUG
                 Thread.Sleep(30);
 #endif
             }
             Console.WriteLine("\n");
-#if !DEBUG
+#if DEBUG
             Thread.Sleep(500);
 #endif
         }

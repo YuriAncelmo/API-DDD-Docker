@@ -4,48 +4,44 @@ namespace Modelo_FeiraLivre
 {
     public class FeiraModel
     {
-        public string ID;
-        public string LONG; 
-        public string LAT;
-        public string SETCENS; 
-        public string AREAP; 
-        public string CODDIST; 
-        public string DISTRITO; 
-        public string CODSUBPREF; 
-        public string SUBPREFE; 
-        public string REGIAO5; 
-        public string REGIAO8; 
-        public string NOME_FEIRA; 
-        public string REGISTRO;
-        public string LOGRADOURO; 
-        public string NUMERO; 
-        public string BAIRRO;
-        public string REFERENCIA;
+        public FeiraModel(string id, string longitude, string latitude, string setcens, string areap, string coddist, string distrito, string codsubpref, string subprefe, string regiao5, string regiao8, string nome_feira, string registro, string logradouro, string numero, string bairro, string referencia)
+        {
+            this.id = id;
+            this.longitude = longitude;
+            this.latitude = latitude;
+            this.setcens = setcens;
+            this.areap = areap;
+            this.coddist = coddist;
+            this.distrito = distrito;
+            this.codsubpref = codsubpref;
+            this.subprefe = subprefe;
+            this.regiao5 = regiao5;
+            this.regiao8 = regiao8;
+            this.nome_feira = nome_feira;
+            this.registro = registro;
+            this.logradouro = logradouro;
+            this.numero = numero;
+            this.bairro = bairro;
+            this.referencia = referencia;
+        }
 
-        public FeiraModel(string iD, string lONG, string lAT, string sETCENS, string aREAP, string cODDIST, string dISTRITO, string cODSUBPREF, string sUBPREFE, string rEGIAO5, string rEGIAO8, string nOME_FEIRA, string rEGISTRO, string lOGRADOURO, string nUMERO, string bAIRRO, string rEFERENCIA)
-        {
-            ID = iD ?? throw new ArgumentNullException(nameof(iD));
-            LONG = lONG ?? throw new ArgumentNullException(nameof(lONG));
-            LAT = lAT ?? throw new ArgumentNullException(nameof(lAT));
-            SETCENS = sETCENS ?? throw new ArgumentNullException(nameof(sETCENS));
-            AREAP = aREAP ?? throw new ArgumentNullException(nameof(aREAP));
-            CODDIST = cODDIST ?? throw new ArgumentNullException(nameof(cODDIST));
-            DISTRITO = dISTRITO ?? throw new ArgumentNullException(nameof(dISTRITO));
-            CODSUBPREF = cODSUBPREF ?? throw new ArgumentNullException(nameof(cODSUBPREF));
-            SUBPREFE = sUBPREFE ?? throw new ArgumentNullException(nameof(sUBPREFE));
-            REGIAO5 = rEGIAO5 ?? throw new ArgumentNullException(nameof(rEGIAO5));
-            REGIAO8 = rEGIAO8 ?? throw new ArgumentNullException(nameof(rEGIAO8));
-            NOME_FEIRA = nOME_FEIRA ?? throw new ArgumentNullException(nameof(nOME_FEIRA));
-            REGISTRO = rEGISTRO ?? throw new ArgumentNullException(nameof(rEGISTRO));
-            LOGRADOURO = lOGRADOURO ?? throw new ArgumentNullException(nameof(lOGRADOURO));
-            NUMERO = nUMERO ?? throw new ArgumentNullException(nameof(nUMERO));
-            BAIRRO = bAIRRO ?? throw new ArgumentNullException(nameof(bAIRRO));
-            REFERENCIA = rEFERENCIA ?? throw new ArgumentNullException(nameof(rEFERENCIA));
-        }
-        public string transformarParaInsert()
-        {
-            return string.Concat("(",ID, ",'", LONG, "','", LAT, "','", SETCENS, "','", AREAP, "','", CODDIST, "','", DISTRITO, "','", CODSUBPREF,
-                "','", SUBPREFE, "','", REGIAO5, "','", REGIAO8, "','", NOME_FEIRA, "','", REGISTRO, "','", LOGRADOURO, "','", NUMERO, "','", BAIRRO, "','", REFERENCIA,"')");
-        }
+        public string id { get; set; }
+        public string longitude { get; set; }
+        public string latitude { get; set; }
+        public string setcens { get; set; }
+        public string areap { get; set; }
+        public string coddist { get; set; }
+        public string distrito { get; set; }
+        public string codsubpref { get; set; }
+        public string subprefe { get; set; }
+        public string regiao5 { get; set; }
+        public string regiao8 { get; set; }
+        public string nome_feira { get; set; }
+        public string registro { get; set; }
+        public string logradouro { get; set; }
+        public string numero { get; set; }
+        public string bairro { get; set; }
+        public string referencia { get; set; }
+
     }
 }
