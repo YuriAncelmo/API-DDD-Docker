@@ -20,3 +20,4 @@ CREATE TABLE Feiras(
    REFERENCIA varchar(255)
 );
 drop table Feiras;
+select * from feiras;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Modelo_FeiraLivre
 {
@@ -24,7 +25,9 @@ namespace Modelo_FeiraLivre
             this.bairro = bairro;
             this.referencia = referencia;
         }
-
+        public FeiraModel()
+        {
+        }
         public string id { get; set; }
         public string longitude { get; set; }
         public string latitude { get; set; }
@@ -37,6 +40,7 @@ namespace Modelo_FeiraLivre
         public string regiao5 { get; set; }
         public string regiao8 { get; set; }
         public string nome_feira { get; set; }
+        [Key]
         public string registro { get; set; }
         public string logradouro { get; set; }
         public string numero { get; set; }

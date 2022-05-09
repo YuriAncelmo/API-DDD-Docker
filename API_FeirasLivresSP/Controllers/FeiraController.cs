@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Util_FeirasLivres;
 
 namespace API_FeirasLivresSP.Controllers
 {
@@ -11,29 +12,23 @@ namespace API_FeirasLivresSP.Controllers
     [Route("[controller]")]
     public class FeiraController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<FeiraController> _logger;
+                private readonly ILogger<FeiraController> _logger;
 
         public FeiraController(ILogger<FeiraController> logger)
         {
             _logger = logger;
+            _logger.Log(LogLevel.Information, "Foi iniciada uma chamada ao endpoint");
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        [Route("distrito")]
+        public string Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            //using(var context = new BancoDeDadosContext())
+            //{
+
+            //}
+            return "200 ok";
         }
     }
 }
