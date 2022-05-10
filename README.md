@@ -3,9 +3,11 @@ Este software teste foi realizado com muito carinho e empenho!
 
 Primeiro de tudo, vamos preparar o ambiente. 
 
+Certifique-se de ter instalado o .net 6.0 e o MySQL 
+
 Há disponível nesta suit, um utilitário para te ajudar a importar os dados pré-existentes de uma das bases de dados que estão disponíveis.
 
-Este utilitário está disponível, na raiz deste projeto, na pasta utilitario, com o nome de Utilitario.exe, lembre-se de seguir todas as instruções presentes 
+Este utilitário está  na raiz deste projeto, na pasta utilitario, com o nome de Utilitario.exe, lembre-se de seguir todas as instruções presentes. 
 
 Após a importação da base de dados para o MySQL e com este já rodando, você pode rodar a API e começar a fazer requests 
 
@@ -50,9 +52,8 @@ Os códigos que podem ser retornados sao
 404 - Quando não for encontrado a feira que você quer alterar, isto é, não há nenhum registro no banco de dados com o mesmo código de registro que você está passando na requisição.
 
 Testes Unitários
-Caso você queira ver os testes unitários disponíveis nesta aplicação, abra o arquivo API_FeirasLivresSP no visual studio , clique com botão direito no projeto Teste_FeiraLivre e selecione Executar todos os testes.
-
-Os resultados destes testes também estarão disponíveis na raiz desta suit, com o nome de 
+Caso você queira ver as coberturas de teste desta aplicação,execute o arquivo CoberturadeTestes.bat na raiz do projeto, ele irá gerar a cobertura de código e também o documento do resujltado dos testes 
+Há uma limitação com o Visual Studio Community, que é o que eu utilizo, para abertura de arquivos .coverage, então não consegui validar seu conteúdo, porém o arquivo com extensão trx também mostra os resultados dos testes.
 
 Logs 
 Sobre os rastreios , usei uma biblioteca nova que encontrei em um forum , chamada sirilog , que possui documentação em https://serilog.net
