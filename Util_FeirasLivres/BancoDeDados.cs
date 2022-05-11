@@ -37,15 +37,14 @@ namespace Util_FeirasLivres
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            DirectoryInfo info = VisualStudioProvider.TryGetSolutionDirectoryInfo();
-            
-            StringConexao stringConexao = JsonConvert.DeserializeObject<StringConexao>(File.ReadAllText(info.FullName+"/StringConexao.json"));
+            string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            StringConexao stringConexao = JsonConvert.DeserializeObject<StringConexao>(File.ReadAllText(path + "/StringConexao.json"));
             optionsBuilder.UseMySQL(string.Format("server={0};port={1};database={2};uid={3};password={4}"
-                                ,stringConexao.server
-                                ,stringConexao.port
-                                ,stringConexao.database
-                                ,stringConexao.uid
-                                ,stringConexao.password));//Configurando para usar MySQL
+                                , stringConexao.server
+                                , stringConexao.port
+                                , stringConexao.database
+                                , stringConexao.uid
+                                , stringConexao.password));//Configurando para usar MySQL
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -56,7 +55,7 @@ namespace Util_FeirasLivres
                 entity.HasKey(e => e.registro);
                 entity.Property(e => e.id);
                 entity.Property(e => e.numero).IsRequired();//Não há nenhum tipo de especificação se os dados são obrigatórios, porém , deixarei apenas o nome da feira e o endereco 
-            entity.Property(e => e.subprefe);
+                entity.Property(e => e.subprefe);
                 entity.Property(e => e.areap);
                 entity.Property(e => e.bairro).IsRequired();
                 entity.Property(e => e.coddist);

@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Dockerfile
+/docker-compose.yml
+/ConfiguracaoMySQL.ps1
+/API_FeirasLivresSP/Dockerfile.original
+/API_FeirasLivresSP/docker-compose.yml
+/API_FeirasLivresSP

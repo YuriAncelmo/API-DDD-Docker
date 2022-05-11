@@ -8,14 +8,15 @@ Certifique-se de ter instalado o .net 6.0 e o MySQL
 Há disponível nesta suit, um utilitário para te ajudar a importar os dados pré-existentes de uma das bases de dados que estão disponíveis.
 
 Este utilitário está  na raiz deste projeto, na pasta utilitario, com o nome de Utilitario.exe, lembre-se de seguir todas as instruções presentes. 
-
-Após a importação da base de dados para o MySQL e com este já rodando, você pode rodar a API e começar a fazer requests 
+Após isso, realize a publicação do site em um IIS. Eu utilizei como base a documentação https://docs.microsoft.com/pt-br/aspnet/core/tutorials/publish-to-iis?view=aspnetcore-6.0&tabs=visual-studio, e para complemento a https://alexalvess.medium.com/publicando-aplicação-net-core-no-iss-f4079c2f312
+Se você tiver problema com as permissões de pasta, tenta dar controle total ao usuário do IIS e aos usuários como o seu próprio.
+Após a importação da base de dados para o MySQL e com este já rodando, com a API rodando, você pode começar a fazer requests 
 
 As requisições para api de feiras ficam no seguinte formato 
 https://localhost:44365/feira/distrito/liberdade
 
 Onde 
-https://localhost:44365/ é a url do servidor
+https://localhost:44365/ é a url e porta do servidor
 feira, é o radical da API 
 distrito, o subgrupo onde você está realizando operacoes
 liberdade, é o que você está procurando, lembre-se , esta solução é CASE SENSITIVE.
