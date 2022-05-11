@@ -35,7 +35,9 @@ namespace API_FeirasLivresSP
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            //Local onde será gravado os logs 
             loggerFactory.AddFile("Logs/API-{Date}.txt");
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

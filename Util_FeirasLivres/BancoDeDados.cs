@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using System.Configuration;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -13,6 +12,11 @@ namespace Util_FeirasLivres
 {
     public class BancoDeDadosContext : DbContext
     {
+        #region Propriedades
+        public DbSet<FeiraModel> Feiras { get; set; }
+        #endregion
+        
+        #region Construtores
         public BancoDeDadosContext()
         {
             try//Cria as tabelas se necessário
@@ -21,11 +25,12 @@ namespace Util_FeirasLivres
                 databaseCreator.CreateTables();
             }
             catch (MySql.Data.MySqlClient.MySqlException)
-            {//Se cair aqui, quer dizer que as tabelas já existem;)
+            {//Se cair aqui, quer dizer que as tabelas já existem ;)
             }
         }
-
-        public DbSet<FeiraModel> Feiras { get; set; }
+        #endregion
+        
+        #region Estruturas Auxiliares
         private struct StringConexao
         {
             public string server { get; set; }
@@ -34,6 +39,9 @@ namespace Util_FeirasLivres
             public string uid { get; set; }
             public string password { get; set; }
         }
+        #endregion
+
+        #region Configurações com Banco de Dados
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
@@ -72,9 +80,10 @@ namespace Util_FeirasLivres
                 entity.Property(e => e.setcens);
                 entity.Property(e => e.subprefe);
             });
-
-
         }
+        #endregion
+        
+        #region Inclusão
         public int Inserir(FeiraModel feira)
         {
             //Garante que a base está criada
@@ -90,19 +99,19 @@ namespace Util_FeirasLivres
                 throw;
             }
         }
-        //public void Deletar(string id_feira)
-        //{
-        //    try
-        //    {
-        //        FeiraModel feira = new FeiraModel() { id = id_feira };
-        //        this.Feiras.Attach(feira);
-        //        this.Feiras.Remove(feira);
-        //        this.SaveChanges();
-        //        //this.Entry(feira).State = Microsoft.EntityFrameworkCore.EntityState.Detached;//Necessário pois foi feito uma operação de inserção e depois remoção na sequencia
+        public void InserirLote(List<FeiraModel> feiras)
+        {
+            //Garante que a base está criada
+            this.Database.EnsureCreated();
 
-        //    }
-        //    catch { throw; }
-        //}
+            feiras.ForEach(feira => this.Feiras.Add(feira));
+
+            this.SaveChanges();
+
+        }
+        #endregion
+        
+        #region Remover
         public void DeletarPorCodigoRegistro(string codigo_registro)
         {
             try
@@ -115,6 +124,9 @@ namespace Util_FeirasLivres
             }
             catch (Exception) { throw; }
         }
+        #endregion
+        
+        #region Alteração 
         public int Alterar(FeiraModel feira)
         {
             try
@@ -151,6 +163,9 @@ namespace Util_FeirasLivres
             }
             catch (Exception) { throw; }
         }
+        #endregion
+        
+        #region Busca
         public FeiraModel BuscaPorRegistro(string codigo_registro)
         {
             try
@@ -226,34 +241,6 @@ namespace Util_FeirasLivres
                 throw;
             }
         }
-        public void InserirLote(List<FeiraModel> feiras)
-        {
-            //Garante que a base está criada
-            this.Database.EnsureCreated();
-
-            feiras.ForEach(feira => this.Feiras.Add(feira));
-
-            this.SaveChanges();
-
-        }
-
-    }
-    public static class VisualStudioProvider
-    {
-        /// <summary>
-        /// Busca a raiz da solução
-        /// </summary>
-        /// <param name="currentPath"></param>
-        /// <returns></returns>
-        public static DirectoryInfo TryGetSolutionDirectoryInfo(string currentPath = null)
-        {
-            var directory = new DirectoryInfo(
-                currentPath ?? Directory.GetCurrentDirectory());
-            while (directory != null && !directory.GetFiles("*.sln").Any())
-            {
-                directory = directory.Parent;
-            }
-            return directory;
-        }
+        #endregion
     }
 }

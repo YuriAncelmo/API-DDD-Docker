@@ -1,12 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API_FeirasLivresSP
 {
@@ -15,6 +9,7 @@ namespace API_FeirasLivresSP
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+            //É necessario esta criação de host para a publicação no IIS
             var host = new WebHostBuilder()
                       .UseKestrel()
                       .UseContentRoot(Directory.GetCurrentDirectory())

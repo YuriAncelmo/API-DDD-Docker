@@ -1,3 +1,2 @@
-echo ' Verificando a cobertura dos testes ' 
-dotnet test --logger trx
-dotnet test --collect "Code Coverage"
+dotnet test Teste_FeiraLivre/Teste_FeiraLivre.csproj --logger trx
+dotnet test Teste_FeiraLivre/Teste_FeiraLivre.csproj --collect "Code Coverage"

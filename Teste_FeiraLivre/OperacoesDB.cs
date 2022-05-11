@@ -7,7 +7,7 @@ namespace Teste_FeiraLivre
     [TestClass]
     public class OperacoesDB
     {
-       
+        #region Cadastros 
         [TestMethod]
         public void CadastroNovaFeira()
         {
@@ -71,6 +71,9 @@ namespace Teste_FeiraLivre
                 }
             };
         }
+        #endregion
+
+        #region Deletar
         [TestMethod]
         public void DeletarFeiraPorCodigoRegistro()
         {
@@ -119,7 +122,9 @@ namespace Teste_FeiraLivre
                 }
             }
         }
-
+        #endregion
+        
+        #region Alteração
         [TestMethod]
         public void AtualizacaoFeira()
         {
@@ -184,6 +189,9 @@ namespace Teste_FeiraLivre
                 }
             };
         }
+        #endregion
+        
+        #region Busca
         [TestMethod]
         public void BuscaPorDistrito()
         {
@@ -252,6 +260,9 @@ namespace Teste_FeiraLivre
                 }
             };
         }
+        #endregion
+        
+        #region Métodos de Suporte
         public void GaranteQueEstaInserido()
         {
             using (var context = new BancoDeDadosContext())
@@ -266,6 +277,6 @@ namespace Teste_FeiraLivre
                 }
             }
         }
-
+        #endregion 
     }
 }

@@ -2,8 +2,6 @@
 using Modelo_FeiraLivre;
 using System;
 using System.IO;
-using System.Data;
-using MySql.Data.MySqlClient;
 using Util_FeirasLivres;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -16,37 +14,42 @@ namespace Utilitario_FeirasLivresSP
     {
         static void Main(string[] args)
         {
-            string BancoDeDados = "MySQL";
-            List<FeiraModel> feiras = new List<FeiraModel>();
             ImprimirCabecalho();
-
-            feiras = RotinaIngestaoArquivo(BancoDeDados);
-            RotinaInsercaoBancoDeDados(feiras);
+            RotinaInsercaoBancoDeDados(RotinaIngestaoArquivo());
             Console.Read();
         }
 
-       
-
+        #region Impressões de Cabeçalho
         public static void ImprimirCabecalho()
         {
+            string header  =
+             @"___________              __                      ____ ___      .__              "+"\n" 
+            +@"\__    ___/___   _______/  |_  ____             |    |   \____ |__| ____  ____  "+"\n" 
+            +@"  |    |_/ __ \ /  ___/\   __\/ __ \    ______  |    |   /    \|  |/ ___\/  _ \ "+"\n" 
+            +@"  |    |\  ___/ \___ \  |  | \  ___/   /_____/  |    |  /   |  \  \  \__(  <_> )"+"\n" 
+            +@"  |____| \___  >____  > |__|  \___  >           |______/|___|  /__|\___  >____/ "+"\n" 
+            +@"             \/     \/            \/                         \/        \/       "+"\n";
+            EscrevaComEfeitoRapido(header);
             EscrevaComEfeito("Olá! Este é o aplicativo que vai te ajudar a tirar os registros do Excel, e colocar em um banco de dados!");
-            EscrevaComEfeito("Há outras formas de fazer este trabalho, como por exemplo o Azure Data Factory da Microsoft, porém, como não estamos falando de sistemas altamente escaláveis consigo fazer este trabalho");
+            EscrevaComEfeito("Há outras formas de fazer este trabalho, como por exemplo o Azure Data Factory da Microsoft, porém, como não estamos falando de sistemas altamente escaláveis consigo fazer este trabalho.");
         }
-       
+
         private static void ImprimirCabecalhoArquivo()
         {
-            EscrevaComEfeito("Podemos começar fazendo a importação dos dados das feiras de São Paulo.");
+            EscrevaComEfeito("Vamos importar os dados das feiras de São Paulo.");
 
             EscrevaComEfeito("A Unico especificou que o arquivo utilizado deve ser o DEINFO_AB_FEIRASLIVRES_2014.csv.");
 
-            EscrevaComEfeito("Você pode continuar com o arquivo especificado ou selecionar um novo, o que quer fazer?");
+            EscrevaComEfeito("Você pode continuar com o arquivo especificado ou selecionar um novo se preferir, o que quer fazer?");
 
             EscreverOpcao(1, "Selecionar o arquivo DEINFO_AB_FEIRASLIVRES_2014.csv.");
 
             EscreverOpcao(2, "Selecionar outro arquivo.");
         }
+        #endregion
 
-        private static List<FeiraModel> RotinaIngestaoArquivo(string BancoDeDados)
+        #region Rotinas
+        private static List<FeiraModel> RotinaIngestaoArquivo()
         {
             List<FeiraModel> feiras;
             string localExecucaoAssembly = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
@@ -71,9 +74,8 @@ namespace Utilitario_FeirasLivresSP
 
                 EscrevaComEfeito("O arquivo está no caminho correto.");
 
-                EscrevaComEfeito("Enquanto você lê essa mensagem, eu já estou importando os dados a memória.");
+                EscrevaComEfeito("Enquanto você lê essa mensagem, eu já estou importando os dados para memória.");
                 feiras = LerCSV(localExecucaoAssembly + estruturaPastas + nomeArquivo);
-
             }
             else
             {
@@ -114,23 +116,20 @@ namespace Utilitario_FeirasLivresSP
 
             OperacoesBanco(feiras);
 
-            //EscrevaComEfeito("Durante o desenvolvimento recebi um erro dizendo \"Unable to connect to any specified mysql host\" e encontrei a resposta dizendo que a minha string de conexão estava com uma ordem equivocada");
-            //EscrevaComEfeito("Se você receber o mesmo erro, veja o que encontrei neste forum do StackOverFlow https://stackoverflow.com/questions/17993657/unable-to-connect-to-any-of-the-specified-mysql-hosts-c-sharp-mysql");
             EscrevaComEfeito("Obrigado por utilizar este utilitário, espero que tenha sido útil ;)");
 
         }
+        #endregion
 
+        #region Operações
         private static void OperacoesBanco(List<FeiraModel> feiras)
         {
 
             using (BancoDeDadosContext db = new BancoDeDadosContext())
             {
-                //EscrevaComEfeito("Como você já tem o banco de dados, eu vou assumir que você já tem a tabela criada. Se não estiver criada, deixa comigo que já resolvo isto também.");
-                EscrevaComEfeito("Beleza, então acho que agora dá pra inserir os registros do arquivo na base de dados :)");
-                //EscrevaComEfeito("Eu vi alguns foruns sobre inserção multipla de valores no MySQL, e vendo neste aqui https://www.mysqltutorial.org/mysql-insert-multiple-rows/, tomei uma decisão.");
-
-                //EscrevaComEfeito("Eu havia criado um modelo para fazer a ingestão dos dados, e posteriormente construiria a logica para comunicação com banco de dados, porém, para longevidade e facilidade de manutenção dese aplicativo, vou usar o Entity Framwork Core.");
-                EscrevaComEfeito("No caso do nosso banco de dados, eu utilizei o Entity Framework Core, e usei como base a documentação -> https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework-core.html");
+                EscrevaComEfeito("Conectamos ao banco, agora conseguimos inserir os registros do arquivo na base de dados :)");
+                
+                EscrevaComEfeito("Para comunicar com o banco de dados, eu utilizei o Entity Framework Core, e usei como base a documentação -> https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework-core.html");
                 db.InserirLote(feiras);
                 Console.Clear();
                 
@@ -200,6 +199,9 @@ namespace Utilitario_FeirasLivresSP
                 //list.ForEach(size => Console.WriteLine(size));
             }
         }
+        #endregion
+
+        #region Métodos auxiliares
         public static string RemoveSpecialCharacters(string str)
         {
             return Regex.Replace(str, "[^a-zA-Z0-9_. ]+", "", RegexOptions.Compiled);
@@ -218,5 +220,18 @@ namespace Utilitario_FeirasLivresSP
             Thread.Sleep(500);
 #endif
         }
+        private static void EscrevaComEfeitoRapido(string s)
+        {
+            for (int i = 0; i < s.Length; i++)
+            {
+                Console.Write(s[i]);
+#if !DEBUG
+                Thread.Sleep(10);
+#endif
+            }
+            Console.WriteLine("\n");
+
+        }
+        #endregion
     }
 }

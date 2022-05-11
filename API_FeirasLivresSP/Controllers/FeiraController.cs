@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Modelo_FeiraLivre;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using Util_FeirasLivres;
@@ -13,12 +12,16 @@ namespace API_FeirasLivresSP.Controllers
     [Route("[controller]")]
     public class FeiraController : ControllerBase
     {
+        #region Propriedades
         private readonly ILogger<FeiraController> _logger;
+        #endregion
 
+        #region Construtores
         public FeiraController(ILogger<FeiraController> logger)
         {
             _logger = logger;
         }
+        #endregion 
 
         #region Inserir
         [HttpPost]
@@ -28,6 +31,7 @@ namespace API_FeirasLivresSP.Controllers
             {
                 try
                 {
+                    _logger.LogInformation("Tentando incluir uma feira", model);
                     context.Inserir(model);
                     return "Ok";
                 }
@@ -47,6 +51,8 @@ namespace API_FeirasLivresSP.Controllers
         public List<FeiraModel> GetDistrito([FromRoute] string nome_distrito)
         {
             List<FeiraModel> feiras_por_distrito = new List<FeiraModel>();
+            _logger.LogInformation("Tentando buscar uma feira pelo distrito "+nome_distrito);
+
             using (var context = new BancoDeDadosContext())
             {
                 feiras_por_distrito = context.BuscaPorDistrito(nome_distrito);
@@ -62,6 +68,8 @@ namespace API_FeirasLivresSP.Controllers
         public List<FeiraModel> GetBairro([FromRoute] string nome_bairro)
         {
             List<FeiraModel> feiras_por_bairro = new List<FeiraModel>();
+            _logger.LogInformation("Tentando buscar uma feira pelo bairro "+nome_bairro);
+
             using (var context = new BancoDeDadosContext())
             {
                 feiras_por_bairro = context.BuscaPorBairro(nome_bairro);
@@ -77,7 +85,10 @@ namespace API_FeirasLivresSP.Controllers
         [Route("regiao5/{regiao5}")]
         public List<FeiraModel> GetRegiao5([FromRoute] string regiao5)
         {
+            
             List<FeiraModel> feiras_por_regiao5 = new List<FeiraModel>();
+            _logger.LogInformation("Tentando buscar uma feira pela regiao5 "+regiao5);
+
             using (var context = new BancoDeDadosContext())
             {
                 feiras_por_regiao5 = context.BuscaPorRegiao5(regiao5);
@@ -94,10 +105,13 @@ namespace API_FeirasLivresSP.Controllers
         public List<FeiraModel> GetNomeFeira([FromRoute] string nome_feira)
         {
             List<FeiraModel> feiras_por_nome = new List<FeiraModel>();
+            _logger.LogInformation("Tentando buscar uma feira pelo nome da feira "+ nome_feira);
+
             using (var context = new BancoDeDadosContext())
             {
                 feiras_por_nome = context.BuscaPorNomeFeira(nome_feira);
             }
+
             if (feiras_por_nome.Count == 0)
                 Response.StatusCode = 204;
             _logger.LogInformation("Feiras retornadas " + feiras_por_nome.Count);
