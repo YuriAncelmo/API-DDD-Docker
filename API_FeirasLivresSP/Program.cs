@@ -16,6 +16,7 @@ namespace API_FeirasLivresSP
                       .UseIISIntegration()
                       .UseStartup<Startup>()
                       .Build();
+            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

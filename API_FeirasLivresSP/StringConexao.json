@@ -1,7 +1,0 @@
-{
-  "server": "localhost",
-  "port": "3306",
-  "database": "Unico",
-  "uid": "root",
-  "password": "admin123"
-}

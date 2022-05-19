@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Modelo_FeiraLivre\Modelo_FeiraLivre.csproj" />
     <ProjectReference Include="..\Util_FeirasLivres\Util_FeirasLivres.csproj" />
   </ItemGroup>
 

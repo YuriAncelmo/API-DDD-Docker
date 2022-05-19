@@ -5,13 +5,9 @@ VisualStudioVersion = 17.0.31808.319
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_FeirasLivresSP", "API_FeirasLivresSP\API_FeirasLivresSP.csproj", "{A96B0B0E-3FD5-4AB7-BE75-0C38791AF22B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilitario_FeirasLivresSP", "Utilitario_FeirasLivresSP\Utilitario_FeirasLivresSP.csproj", "{2341079C-3343-45E4-B019-3ABC0180AE48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teste_FeiraLivre", "Teste_FeiraLivre\Teste_FeiraLivre.csproj", "{A19EAE69-60E6-4899-A864-8EAD62F22CF6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modelo_FeiraLivre", "Modelo_FeiraLivre\Modelo_FeiraLivre.csproj", "{85C7CD89-E7D2-4667-80BF-5CA392944F51}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Util_FeirasLivres", "Util_FeirasLivres\Util_FeirasLivres.csproj", "{5EA88FF3-2B20-4F55-AB0B-D8B16BCBC463}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teste_FeiraLivre", "Teste_FeiraLivre\Teste_FeiraLivre.csproj", "{A19EAE69-60E6-4899-A864-8EAD62F22CF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApi", "TestApi\TestApi.csproj", "{E16D64D6-F8AA-435C-BC0B-21B20957B2CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,22 +19,14 @@ Global
 		{A96B0B0E-3FD5-4AB7-BE75-0C38791AF22B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A96B0B0E-3FD5-4AB7-BE75-0C38791AF22B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A96B0B0E-3FD5-4AB7-BE75-0C38791AF22B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2341079C-3343-45E4-B019-3ABC0180AE48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2341079C-3343-45E4-B019-3ABC0180AE48}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2341079C-3343-45E4-B019-3ABC0180AE48}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2341079C-3343-45E4-B019-3ABC0180AE48}.Release|Any CPU.Build.0 = Release|Any CPU
-		{85C7CD89-E7D2-4667-80BF-5CA392944F51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85C7CD89-E7D2-4667-80BF-5CA392944F51}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85C7CD89-E7D2-4667-80BF-5CA392944F51}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85C7CD89-E7D2-4667-80BF-5CA392944F51}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5EA88FF3-2B20-4F55-AB0B-D8B16BCBC463}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EA88FF3-2B20-4F55-AB0B-D8B16BCBC463}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EA88FF3-2B20-4F55-AB0B-D8B16BCBC463}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EA88FF3-2B20-4F55-AB0B-D8B16BCBC463}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A19EAE69-60E6-4899-A864-8EAD62F22CF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A19EAE69-60E6-4899-A864-8EAD62F22CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A19EAE69-60E6-4899-A864-8EAD62F22CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A19EAE69-60E6-4899-A864-8EAD62F22CF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E16D64D6-F8AA-435C-BC0B-21B20957B2CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E16D64D6-F8AA-435C-BC0B-21B20957B2CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E16D64D6-F8AA-435C-BC0B-21B20957B2CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E16D64D6-F8AA-435C-BC0B-21B20957B2CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Util_FeirasLivres\Util_FeirasLivres.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="StringConexao.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

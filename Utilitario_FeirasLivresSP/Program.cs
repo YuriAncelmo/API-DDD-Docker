@@ -1,12 +1,8 @@
 ﻿using Microsoft.VisualBasic.FileIO;
-using Modelo_FeiraLivre;
 using System;
 using System.IO;
-using Util_FeirasLivres;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Linq;
-using System.Threading;
 
 namespace Utilitario_FeirasLivresSP
 {
@@ -125,17 +121,17 @@ namespace Utilitario_FeirasLivresSP
         private static void OperacoesBanco(List<FeiraModel> feiras)
         {
 
-            using (BancoDeDadosContext db = new BancoDeDadosContext())
-            {
-                EscrevaComEfeito("Conectamos ao banco, agora conseguimos inserir os registros do arquivo na base de dados :)");
+            //using (BancoDeDadosContext db = new BancoDeDadosContext())
+            //{
+            //    EscrevaComEfeito("Conectamos ao banco, agora conseguimos inserir os registros do arquivo na base de dados :)");
                 
-                EscrevaComEfeito("Para comunicar com o banco de dados, eu utilizei o Entity Framework Core, e usei como base a documentação -> https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework-core.html");
-                db.InserirLote(feiras);
-                Console.Clear();
+            //    EscrevaComEfeito("Para comunicar com o banco de dados, eu utilizei o Entity Framework Core, e usei como base a documentação -> https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework-core.html");
+            //    db.InserirLote(feiras);
+            //    Console.Clear();
                 
-            }
-            using (BancoDeDadosContext db = new BancoDeDadosContext())
-                EscrevaComEfeito(String.Format("Deu certo!. Foram inseridos {0} registros,e a quantidade total de registros no banco é de {1}", feiras.Count, db.Feiras.Count()));
+            //}
+            //using (BancoDeDadosContext db = new BancoDeDadosContext())
+            //    EscrevaComEfeito(String.Format("Deu certo!. Foram inseridos {0} registros,e a quantidade total de registros no banco é de {1}", feiras.Count, db.Feiras.Count()));
 
         }
         private static int LerOpcao()

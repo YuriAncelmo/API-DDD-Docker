@@ -101,3 +101,10 @@ Os logs de API estão dentro da pasta do projeto se você rodou o projeto direto d
 
 Se você hospedou o site em seu IIS, os logs estão na pasta que você colocou seu site. Ex.: C:\inetpub\wwwroot\APIFeiras\Logs
 	
+## Swagger 
+Está disponível no endpoint da API swagger/v1/swagger 
+
+#Referencias 
+https://docs.microsoft.com/pt-br/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio
+https://docs.microsoft.com/pt-br/aspnet/core/web-api/handle-errors?view=aspnetcore-6.0
+https://pt.stackoverflow.com/questions/21278/como-interceptar-exceções-quando-se-trabalha-com-o-entity-framework
