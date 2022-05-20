@@ -1,110 +1,112 @@
-# Teste de Codificação - Unico
+# Teste de Codificaï¿½ï¿½o - Unico
 
 Este software teste foi realizado com muito carinho e empenho!
 
-## Instalação
+## Instalaï¿½ï¿½o
 
 Primeiro de tudo, vamos preparar o ambiente. 
 
 Certifique-se de ter instalado o .net 6.0 e o MySQL Server.
 
-#### Importação dos dados e configuração do banco 
+Docker , se vocÃª tiver uma instancia do mysql jÃ¡ rodando na sua maquina, certifique-se de parÃ¡-la. Caso contrÃ¡rio, poderÃ¡ receber um erro hnsCallRawResponse.
+#### Importaï¿½ï¿½o dos dados e configuraï¿½ï¿½o do banco 
 
-Há disponível nesta suit, um utilitário para te ajudar a importar os dados pré-existentes de uma das bases de dados que estão disponíveis.
+Hï¿½ disponï¿½vel nesta suit, um utilitï¿½rio para te ajudar a importar os dados prï¿½-existentes de uma das bases de dados que estï¿½o disponï¿½veis.
 
-Este utilitário está  na raiz deste projeto, na pasta Utilitário, com nome Utilitario_FeirasLivresSP.exe, lembre-se de seguir todas as instruções presentes. 
+Este utilitï¿½rio estï¿½  na raiz deste projeto, na pasta Utilitï¿½rio, com nome Utilitario_FeirasLivresSP.exe, lembre-se de seguir todas as instruï¿½ï¿½es presentes. 
 #### Rodando a API 
 
-Você tem algumas opções para rodar a API, a primeira é abrindo a solução a partir do arquivo API_FeirasLivresSP.sln.
+Vocï¿½ tem algumas opï¿½ï¿½es para rodar a API, a primeira ï¿½ abrindo a soluï¿½ï¿½o a partir do arquivo API_FeirasLivresSP.sln.
 
-Feito isto, clique no play do visual studio, com a configuração de IIS selecionada.
+Feito isto, clique no play do visual studio, com a configuraï¿½ï¿½o de IIS selecionada.
 
-#### Publicação do Site no IIS Local
+#### Publicaï¿½ï¿½o do Site no IIS Local
 
-Para realizar a publicação do site em um IIS, utilizei como base a documentação [Publicando um aplicativo .Net Core no IIS - Autor independente](https://alexalvess.medium.com/publicando-aplicação-net-core-no-iss-f4079c2f312) e para complemento a [Publicando um .Net Core no IIS - MSDN](https://docs.microsoft.com/pt-br/aspnet/core/tutorials/publish-to-iis?view=aspnetcore-6.0&tabs=visual-studio)
+Para realizar a publicaï¿½ï¿½o do site em um IIS, utilizei como base a documentaï¿½ï¿½o [Publicando um aplicativo .Net Core no IIS - Autor independente](https://alexalvess.medium.com/publicando-aplicaï¿½ï¿½o-net-core-no-iss-f4079c2f312) e para complemento a [Publicando um .Net Core no IIS - MSDN](https://docs.microsoft.com/pt-br/aspnet/core/tutorials/publish-to-iis?view=aspnetcore-6.0&tabs=visual-studio)
 
-Se tiver problema com as permissões de pasta, tenta dar controle total ao usuário do IIS e aos usuários como o seu próprio.
+Se tiver problema com as permissï¿½es de pasta, tenta dar controle total ao usuï¿½rio do IIS e aos usuï¿½rios como o seu prï¿½prio.
 
 ## Uso
 
-Após a importação da base de dados para o MySQL e com este já rodando, com a API rodando, você pode começar a fazer requests 
+Apï¿½s a importaï¿½ï¿½o da base de dados para o MySQL e com este jï¿½ rodando, com a API rodando, vocï¿½ pode comeï¿½ar a fazer requests 
 
-As requisições para api de feiras ficam no seguinte formato 
+As requisiï¿½ï¿½es para api de feiras ficam no seguinte formato 
 https://localhost:44365/feira/distrito/liberdade
 
 Onde 
-https://localhost:44365/ é a url e porta do servidor.
+https://localhost:44365/ ï¿½ a url e porta do servidor.
 
-feira, é o resource que você está acessando da API.
+feira, ï¿½ o resource que vocï¿½ estï¿½ acessando da API.
 
-distrito, o subgrupo onde você está realizando operações.
+distrito, o subgrupo onde vocï¿½ estï¿½ realizando operaï¿½ï¿½es.
 
-liberdade, é a sua consulta, lembre-se, esta solução é CASE SENSITIVE.
+liberdade, ï¿½ a sua consulta, lembre-se, esta soluï¿½ï¿½o ï¿½ CASE SENSITIVE.
 
 ### Collection Postman 
-Vou disponibilizar também uma collection do postman (Unico_APIFeirasSP.postman_collection) para você fazer a importação e testar cada um dos endpoints.
-Se você tiver problemas de SSL com postman, desabilite, pois nesta solução, não foi previsto utilização de SSL, por se tratar apenas de um teste.
+Vou disponibilizar tambï¿½m uma collection do postman (Unico_APIFeirasSP.postman_collection) para vocï¿½ fazer a importaï¿½ï¿½o e testar cada um dos endpoints.
+Se vocï¿½ tiver problemas de SSL com postman, desabilite, pois nesta soluï¿½ï¿½o, nï¿½o foi previsto utilizaï¿½ï¿½o de SSL, por se tratar apenas de um teste.
 
 ### Requisito Busca
-Iniciando por endpoints de busca, você precisa utilizar o método GET e com isso você tem as opções de pesquisar por bairro, distrito, regiao5 e nome_feira.
-E os exemplos são respectivamente:
+Iniciando por endpoints de busca, vocï¿½ precisa utilizar o mï¿½todo GET e com isso vocï¿½ tem as opï¿½ï¿½es de pesquisar por bairro, distrito, regiao5 e nome_feira.
+E os exemplos sï¿½o respectivamente:
 
 https://localhost:44365/feira/bairro/liberdade
 https://localhost:44365/feira/distrito/liberdade
 https://localhost:44365/feira/regiao5/liberdade
 https://localhost:44365/feira/nome/liberdade
 
-Você verá que as APIs com métodos GET retornam basicamente 2 códigos no que se refere a códigos de sucesso.  
+Vocï¿½ verï¿½ que as APIs com mï¿½todos GET retornam basicamente 2 cï¿½digos no que se refere a cï¿½digos de sucesso.  
 
 ##### Retornos 
-200 - Ok , sua requisição está correta e possui resultados.
-204 - No content, sua requisição está correta, porém não há resultados disponíveis.
+200 - Ok , sua requisiï¿½ï¿½o estï¿½ correta e possui resultados.
+204 - No content, sua requisiï¿½ï¿½o estï¿½ correta, porï¿½m nï¿½o hï¿½ resultados disponï¿½veis.
 
-### Requisito Inserção
+### Requisito Inserï¿½ï¿½o
 
-Sobre a inserção de novos registros, você pode acessar o endpoint raiz https://localhost:44365/feira/ passando como parametro no body, a entidade que você quer inserir.
+Sobre a inserï¿½ï¿½o de novos registros, vocï¿½ pode acessar o endpoint raiz https://localhost:44365/feira/ passando como parametro no body, a entidade que vocï¿½ quer inserir.
 
-A inserção também está disponível na collection, atente-se para os códigos que podem vir deste endpoint no quesito de tratamento e exceção.
+A inserï¿½ï¿½o tambï¿½m estï¿½ disponï¿½vel na collection, atente-se para os cï¿½digos que podem vir deste endpoint no quesito de tratamento e exceï¿½ï¿½o.
 
 ##### Retornos 
 
 200 - Ok, tudo certo e ainda te retornara uma mensagem no body mostrando	
-422 - Houve algum erro de negócio, como por exemplo, vocês está tentando inserir uma feira que já existe, junto a este código, virá a mensagem retornada pelo MySQL https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status/422
+422 - Houve algum erro de negï¿½cio, como por exemplo, vocï¿½s estï¿½ tentando inserir uma feira que jï¿½ existe, junto a este cï¿½digo, virï¿½ a mensagem retornada pelo MySQL https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status/422
 
-### Requisito Remoção
+### Requisito Remoï¿½ï¿½o
 
-Quanto a remoção de um registro, você precisa passar um código de registro, assim como está na collection, no próprio endpoint https://localhost:44365/feira/77414-A por exemplo. 
+Quanto a remoï¿½ï¿½o de um registro, vocï¿½ precisa passar um cï¿½digo de registro, assim como estï¿½ na collection, no prï¿½prio endpoint https://localhost:44365/feira/77414-A por exemplo. 
 
 ##### Retornos 
 
-Ela retornara apenas 200 OK, mesmo que o registro que você esteja tentando deletar não exista ou um registro de erro genérico caso aconteça.
+Ela retornara apenas 200 OK, mesmo que o registro que vocï¿½ esteja tentando deletar nï¿½o exista ou um registro de erro genï¿½rico caso aconteï¿½a.
 
-### Requisito Alteração
+### Requisito Alteraï¿½ï¿½o
 
-Se você quiser alterar algum registro, saiba que pode, e pra isso, acesse o endpoint raiz, e execute um metodo patch passando o id (https://localhost:44365/feira/77414-A), que permite que você altere um ou mais campos, com exceção do campo registro
+Se vocï¿½ quiser alterar algum registro, saiba que pode, e pra isso, acesse o endpoint raiz, e execute um metodo patch passando o id (https://localhost:44365/feira/77414-A), que permite que vocï¿½ altere um ou mais campos, com exceï¿½ï¿½o do campo registro
 
 ##### Retornos 
 
 200 - OK 
 
-404 - Quando não for encontrado a feira que você quer alterar, isto é, não há nenhum registro no banco de dados com o mesmo código de registro que você está passando na requisição.
+404 - Quando nï¿½o for encontrado a feira que vocï¿½ quer alterar, isto ï¿½, nï¿½o hï¿½ nenhum registro no banco de dados com o mesmo cï¿½digo de registro que vocï¿½ estï¿½ passando na requisiï¿½ï¿½o.
 
-## Testes Unitários
-Caso você queira ver as coberturas de teste desta aplicação, execute o arquivo CoberturadeTestes.bat na raiz do projeto, ele irá gerar a cobertura de código e também o documento do resultado dos testes.
+## Testes Unitï¿½rios
+Caso vocï¿½ queira ver as coberturas de teste desta aplicaï¿½ï¿½o, execute o arquivo CoberturadeTestes.bat na raiz do projeto, ele irï¿½ gerar a cobertura de cï¿½digo e tambï¿½m o documento do resultado dos testes.
 
-Os arquivos gerados estão dentro da pasta Teste_FeiraLivre\TestResults
+Os arquivos gerados estï¿½o dentro da pasta Teste_FeiraLivre\TestResults
 
 ## Logs 
-Sobre os rastreios , usei uma biblioteca nova que encontrei em um forum , chamada sirilog , que possui documentação em https://serilog.net
+Sobre os rastreios , usei uma biblioteca nova que encontrei em um forum , chamada sirilog , que possui documentaï¿½ï¿½o em https://serilog.net
 
-Os logs de API estão dentro da pasta do projeto se você rodou o projeto direto do Visual Studio.
+Os logs de API estï¿½o dentro da pasta do projeto se vocï¿½ rodou o projeto direto do Visual Studio.
 
-Se você hospedou o site em seu IIS, os logs estão na pasta que você colocou seu site. Ex.: C:\inetpub\wwwroot\APIFeiras\Logs
+Se vocï¿½ hospedou o site em seu IIS, os logs estï¿½o na pasta que vocï¿½ colocou seu site. Ex.: C:\inetpub\wwwroot\APIFeiras\Logs
 	
 ## Swagger 
-Está disponível no endpoint da API swagger/v1/swagger 
+Estï¿½ disponï¿½vel no endpoint da API swagger/v1/swagger 
 
 #Referencias 
 https://docs.microsoft.com/pt-br/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio
 https://docs.microsoft.com/pt-br/aspnet/core/web-api/handle-errors?view=aspnetcore-6.0
-https://pt.stackoverflow.com/questions/21278/como-interceptar-exceções-quando-se-trabalha-com-o-entity-framework
+https://pt.stackoverflow.com/questions/21278/como-interceptar-exceï¿½ï¿½es-quando-se-trabalha-com-o-entity-framework
+https://dev.to/gbengelebs/how-to-containerize-an-asp-netcore-api-and-mysql-with-docker-compose-1m5c
