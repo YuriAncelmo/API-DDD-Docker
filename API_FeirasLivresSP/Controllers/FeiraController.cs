@@ -200,10 +200,17 @@ namespace API_FeirasLivresSP.Controllers
 
         public IActionResult Patch([FromBody] FeiraModel model)
         {
+            _logger.LogInformation("Tentando alterar a feira com código de registro " + model.registro);
+
             int linhasafetadas = _context.Alterar(model);
             if (linhasafetadas == 0)
+            {
+                _logger.LogInformation("Feira com código de registro " + model.registro + " não existe, por isto não foi alterada.");
+
                 return NotFound();
-            else return Ok(model);
+            }
+            _logger.LogInformation("Feira com código de registro " + model.registro + " alterada.");
+            return Ok(model);
         }
         #endregion
 
@@ -224,14 +231,23 @@ namespace API_FeirasLivresSP.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Delete([FromRoute] string registro)
         {
+            _logger.LogInformation("Tentando deletar a feira com código de registro " + registro);
+
             if (_context.FeiraExiste(registro))
             {
+                _logger.LogInformation("A feira existe");
+
                 _context.DeletarPorCodigoRegistro(registro);
+                _logger.LogInformation("A feira foi deletada");
+
                 return Accepted();
             }
             else
-                return NoContent();
+            {
+                _logger.LogInformation("A feira não existe");
 
+                return NoContent();
+            }
         }
         #endregion
 
@@ -242,11 +258,13 @@ namespace API_FeirasLivresSP.Controllers
         {
             var exceptionHandlerFeature =
                 HttpContext.Features.Get<IExceptionHandlerFeature>()!;
+            _logger.LogInformation("Ocorreu algum erro");
 
             return Problem(
                 detail: exceptionHandlerFeature.Error.InnerException.ToString(),
 
-                title: exceptionHandlerFeature.Error.Message);
+                title: exceptionHandlerFeature.Error.Message
+                );
 
         }
         #endregion
