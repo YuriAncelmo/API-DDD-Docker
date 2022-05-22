@@ -110,3 +110,4 @@ https://docs.microsoft.com/pt-br/aspnet/core/tutorials/getting-started-with-swas
 https://docs.microsoft.com/pt-br/aspnet/core/web-api/handle-errors?view=aspnetcore-6.0
 https://pt.stackoverflow.com/questions/21278/como-interceptar-exce��es-quando-se-trabalha-com-o-entity-framework
 https://dev.to/gbengelebs/how-to-containerize-an-asp-netcore-api-and-mysql-with-docker-compose-1m5c
+https://medium.com/beelabacademy/implementando-na-prática-rest-api-com-conceitos-de-ddd-net-core-sql-no-docker-ioc-2cb3a2e7c649
