@@ -20,5 +20,9 @@ namespace DDDWebAPI.Infrastruture.Repository.Repositorys
         {
             return _context.Feiras.Where(feira => feira.registro == registro).FirstOrDefault();
         }
+        public override void Update(Feira obj)
+        {
+            base.Update(obj);
+        }
     }
 }

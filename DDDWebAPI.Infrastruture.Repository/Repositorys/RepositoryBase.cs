@@ -18,17 +18,9 @@ namespace DDDWebAPI.Infrastruture.Repository.Repositorys
 
         public virtual void Add(TEntity obj)
         {
-            try
-            {
-                _context.Set<TEntity>().Add(obj);
-                _context.SaveChanges();
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
+            //_context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Detached;//Liberar a entidade
+            _context.Set<TEntity>().Add(obj);
+            _context.SaveChanges();
         }
 
         public virtual TEntity GetById(int id)
@@ -61,18 +53,8 @@ namespace DDDWebAPI.Infrastruture.Repository.Repositorys
 
         public virtual void Remove(TEntity obj)
         {
-            try
-            {
                 _context.Set<TEntity>().Remove(obj);
                 _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-
-
         }
 
         public virtual void Dispose()

@@ -80,7 +80,8 @@ namespace DDDWebAPI.Infrastruture.CrossCutting.Adapter.Map
 
         public FeiraDTO MapperToDTO(Feira feira)
         {
-
+            if (feira == null)
+                return null;
             FeiraDTO clienteDTO = new FeiraDTO
             {
                 id = feira.id,

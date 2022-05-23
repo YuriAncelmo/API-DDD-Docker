@@ -27,6 +27,7 @@ namespace WebAPIDDD.Presentation.Controllers
         /// <response code="422">feira nao enviada no body</response>
         /// <response code="422">feira duplicada, retorna vazio</response>
         [HttpPost]
+        [Route("")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FeiraDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -98,9 +99,9 @@ namespace WebAPIDDD.Presentation.Controllers
         /// <response code="404">Nenhuma feira foi encontrada</response>
         /// <response code="500">Erro interno</response>
         [HttpPatch]
+        [Route("")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-
         public IActionResult Patch([FromBody] FeiraDTO model)
         {
             if (model == null || _applicationServiceFeira.GetByRegistro(model.registro) == null)
