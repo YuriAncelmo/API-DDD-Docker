@@ -105,6 +105,9 @@ Se voc� hospedou o site em seu IIS, os logs est�o na pasta que voc� coloco
 ## Swagger 
 Est� dispon�vel no endpoint da API swagger/v1/swagger 
 
+## Erros comuns 
+https://stackoverflow.com/questions/48066994/docker-no-matching-manifest-for-windows-amd64-in-the-manifest-list-entries
+
 #Referencias 
 https://docs.microsoft.com/pt-br/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio
 https://docs.microsoft.com/pt-br/aspnet/core/web-api/handle-errors?view=aspnetcore-6.0

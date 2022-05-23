@@ -1,6 +1,9 @@
 version: '3.4'
 
 services:
+  database:
+    volumes:
+      - datafiles:/var/lib/mysql
   webapiddd.presentation:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development

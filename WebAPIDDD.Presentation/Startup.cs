@@ -61,7 +61,7 @@ namespace WebAPIDDD.Presentation
                 services.AddDbContext<MySqlContext>(optionsBuilder =>
                 {
                     optionsBuilder.UseMySQL(connString);
-                },ServiceLifetime.Transient);
+                });
 
                 //services.AddMvc();
                 //services.AddMemoryCache();

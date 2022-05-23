@@ -11,6 +11,7 @@ namespace DDDWebAPI.Infrastruture.Repository.Repositorys
             : base(Context)
         {
             _context = Context;
+            
         }
         public IEnumerable<Feira> GetAllByNome(string nome_feira)
         {
@@ -19,6 +20,12 @@ namespace DDDWebAPI.Infrastruture.Repository.Repositorys
         public Feira GetByRegistro(string registro)
         {
             return _context.Feiras.Where(feira => feira.registro == registro).FirstOrDefault();
+        }
+        public override void Add(Feira feira)
+        {
+            //base.Add(obj);
+            _context.Add(feira);
+            _context.SaveChanges();
         }
         public override void Update(Feira feira)
         {
@@ -56,6 +63,14 @@ namespace DDDWebAPI.Infrastruture.Repository.Repositorys
                 _context.SaveChanges();
             }
             catch (Exception) { throw; }
+        }
+        public override void Remove(Feira feira)
+        {
+            //base.Remove(obj);
+            _context.Feiras.Attach(feira);
+            _context.Feiras.Remove(feira);
+            _context.SaveChanges();
+            _context.Entry(feira).State = Microsoft.EntityFrameworkCore.EntityState.Detached;//Necessário pois foi feito uma operação de inserção e depois remoção na sequencia
         }
     }
 }

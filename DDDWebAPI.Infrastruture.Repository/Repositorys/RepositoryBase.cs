@@ -53,8 +53,8 @@ namespace DDDWebAPI.Infrastruture.Repository.Repositorys
 
         public virtual void Remove(TEntity obj)
         {
-                _context.Set<TEntity>().Remove(obj);
-                _context.SaveChanges();
+            _context.Remove<TEntity>(obj);
+            _context.SaveChanges();
         }
 
         public virtual void Dispose()
