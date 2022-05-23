@@ -15,29 +15,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.0 - Domain", "3.0 - Domai
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.0 - Infrastructure", "4.0 - Infrastructure", "{4B1A0470-AE24-4340-A9E8-E85CBF46AAD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDWebAPI.Domain", "DDDWebAPI.Domain\DDDWebAPI.Domain.csproj", "{072D0A4A-D9FC-4752-8098-777233335801}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDWebAPI.Domain", "DDDWebAPI.Domain\DDDWebAPI.Domain.csproj", "{072D0A4A-D9FC-4752-8098-777233335801}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDWebAPI.Domain.Core", "DDDWebAPI.Domain.Core\DDDWebAPI.Domain.Core.csproj", "{7AFD91A4-3A0C-44B2-8AFD-4C83FDF8F46F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDWebAPI.Domain.Core", "DDDWebAPI.Domain.Core\DDDWebAPI.Domain.Core.csproj", "{7AFD91A4-3A0C-44B2-8AFD-4C83FDF8F46F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDWebAPI.Domain.Services", "DDDWebAPI.Domain.Services\DDDWebAPI.Domain.Services.csproj", "{9BAFC0D8-EDCF-466F-B15E-DC117DAC88BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDWebAPI.Domain.Services", "DDDWebAPI.Domain.Services\DDDWebAPI.Domain.Services.csproj", "{9BAFC0D8-EDCF-466F-B15E-DC117DAC88BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDWebAPI.Application", "DDDWebAPI.Application\DDDWebAPI.Application.csproj", "{676D153E-DA3A-4C4A-89BE-8F8FE85EDF57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDWebAPI.Application", "DDDWebAPI.Application\DDDWebAPI.Application.csproj", "{676D153E-DA3A-4C4A-89BE-8F8FE85EDF57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDWebAPI.Application.DTO", "DDDWebAPI.Application.DTO\DDDWebAPI.Application.DTO.csproj", "{AF73DD47-CC1F-4CD5-BD73-C37202AA33C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDWebAPI.Application.DTO", "DDDWebAPI.Application.DTO\DDDWebAPI.Application.DTO.csproj", "{AF73DD47-CC1F-4CD5-BD73-C37202AA33C3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - Data", "4.1 - Data", "{C64BBF14-9527-4178-93E5-3C8DC518DD92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDWebAPI.Infrastructure.Data", "DDDWebAPI.Infrastructure.Data\DDDWebAPI.Infrastructure.Data.csproj", "{DAA10F1C-C215-46CD-89F7-A396ADB1C4BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDWebAPI.Infrastructure.Data", "DDDWebAPI.Infrastructure.Data\DDDWebAPI.Infrastructure.Data.csproj", "{DAA10F1C-C215-46CD-89F7-A396ADB1C4BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDWebAPI.Infrastruture.Repository", "DDDWebAPI.Infrastruture.Repository\DDDWebAPI.Infrastruture.Repository.csproj", "{FA7FDC9A-55D6-4993-976A-7583C2189F50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDWebAPI.Infrastruture.Repository", "DDDWebAPI.Infrastruture.Repository\DDDWebAPI.Infrastruture.Repository.csproj", "{FA7FDC9A-55D6-4993-976A-7583C2189F50}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - CrossCutting", "4.2 - CrossCutting", "{6A48CB34-3D4D-4B0D-BBB0-1F927307D1E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDWebAPI.Infrastruture.CrossCutting.Adapter", "DDDWebAPI.Infrastruture.CrossCutting.Adapter\DDDWebAPI.Infrastruture.CrossCutting.Adapter.csproj", "{62B76EAA-FE69-4CE7-AF96-E67E37C2031E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDWebAPI.Infrastruture.CrossCutting.Adapter", "DDDWebAPI.Infrastruture.CrossCutting.Adapter\DDDWebAPI.Infrastruture.CrossCutting.Adapter.csproj", "{62B76EAA-FE69-4CE7-AF96-E67E37C2031E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDWebAPI.Infrastruture.CrossCutting.IOC", "DDDWebAPI.Infrastruture.CrossCutting.IOC\DDDWebAPI.Infrastruture.CrossCutting.IOC.csproj", "{1CC58447-C788-4438-90E2-60FFADE64C51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDWebAPI.Infrastruture.CrossCutting.IOC", "DDDWebAPI.Infrastruture.CrossCutting.IOC\DDDWebAPI.Infrastruture.CrossCutting.IOC.csproj", "{1CC58447-C788-4438-90E2-60FFADE64C51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIDDD.Presentation", "WebAPIDDD.Presentation\WebAPIDDD.Presentation.csproj", "{7EF5F2C6-833F-496D-BFFA-832788111BDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPIDDD.Presentation", "WebAPIDDD.Presentation\WebAPIDDD.Presentation.csproj", "{7EF5F2C6-833F-496D-BFFA-832788111BDC}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{45BAD7DD-AE90-4FA2-8A74-8C161A9C6E8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{7EF5F2C6-833F-496D-BFFA-832788111BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EF5F2C6-833F-496D-BFFA-832788111BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EF5F2C6-833F-496D-BFFA-832788111BDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45BAD7DD-AE90-4FA2-8A74-8C161A9C6E8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45BAD7DD-AE90-4FA2-8A74-8C161A9C6E8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45BAD7DD-AE90-4FA2-8A74-8C161A9C6E8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45BAD7DD-AE90-4FA2-8A74-8C161A9C6E8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

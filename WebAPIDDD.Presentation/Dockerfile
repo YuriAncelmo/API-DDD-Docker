@@ -6,11 +6,19 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
-EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["WebAPIDDD.Presentation/WebAPIDDD.Presentation.csproj", "WebAPIDDD.Presentation/"]
+COPY ["DDDWebAPI.Application.DTO/DDDWebAPI.Application.DTO.csproj", "DDDWebAPI.Application.DTO/"]
+COPY ["DDDWebAPI.Domain.Core/DDDWebAPI.Domain.Core.csproj", "DDDWebAPI.Domain.Core/"]
+COPY ["DDDWebAPI.Domain/DDDWebAPI.Domain.csproj", "DDDWebAPI.Domain/"]
+COPY ["DDDWebAPI.Infrastruture.CrossCutting.IOC/DDDWebAPI.Infrastruture.CrossCutting.IOC.csproj", "DDDWebAPI.Infrastruture.CrossCutting.IOC/"]
+COPY ["DDDWebAPI.Domain.Services/DDDWebAPI.Domain.Services.csproj", "DDDWebAPI.Domain.Services/"]
+COPY ["DDDWebAPI.Infrastruture.Repository/DDDWebAPI.Infrastruture.Repository.csproj", "DDDWebAPI.Infrastruture.Repository/"]
+COPY ["DDDWebAPI.Infrastructure.Data/DDDWebAPI.Infrastructure.Data.csproj", "DDDWebAPI.Infrastructure.Data/"]
+COPY ["DDDWebAPI.Application/DDDWebAPI.Application.csproj", "DDDWebAPI.Application/"]
+COPY ["DDDWebAPI.Infrastruture.CrossCutting.Adapter/DDDWebAPI.Infrastruture.CrossCutting.Adapter.csproj", "DDDWebAPI.Infrastruture.CrossCutting.Adapter/"]
 RUN dotnet restore "WebAPIDDD.Presentation/WebAPIDDD.Presentation.csproj"
 COPY . .
 WORKDIR "/src/WebAPIDDD.Presentation"

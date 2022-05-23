@@ -11,7 +11,7 @@ using DDDWebAPI.Infrastruture.Repository.Repositorys;
 
 namespace DDDWebAPI.Infrastruture.CrossCutting.IOC
 {
-    internal class ConfigurationIOC
+    public class ConfigurationIOC
     {
         public static void Load(ContainerBuilder builder)
         {

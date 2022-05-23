@@ -1,7 +1,7 @@
 ﻿using Autofac;
 namespace DDDWebAPI.Infrastruture.CrossCutting.IOC
 {
-    internal class ModuleIOC:Module
+    public class ModuleIOC:Module
     {
         protected override void Load(ContainerBuilder builder)
         {
