@@ -44,9 +44,10 @@ namespace WebAPIDDD.Presentation.Controllers
         /// <param name="model">FeiraDTO a ser inserida</param>
         /// <returns>Se a feira foi criada ou não</returns>
         /// <remarks>ue</remarks>
-        /// <response code="201">retorna a feira criada</response>
-        /// <response code="422">feira nao enviada no body</response>
-        /// <response code="422">feira duplicada, retorna vazio</response>
+        /// <response code="200">Feira criada</response>
+        /// <response code="400">feira nao enviada no body</response>
+        /// <response code="422">feira enviada com problemas, veja a mensagem de erro</response>
+        /// <response code="500">erro desconhecido</response>
         [HttpPost]
         [Route("")]
         [Produces("application/json")]
@@ -54,21 +55,25 @@ namespace WebAPIDDD.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Post([FromBody] FeiraDTO model)
+        public ActionResult<FeiraDTO> Post([FromBody] FeiraDTO model)
         {
             _logger.LogInformation("Validando se a entidade já existe");
+            
             if (model == null)
-                return NotFound();
+                return BadRequest("Feira inválida");
+            if (model.registro == null)
+                return UnprocessableEntity("É necessário ter um registro para cadastrar");
+            
             if (_applicationServiceFeira.GetByRegistro(model.registro) != null)
             {
                 _logger.LogInformation("A feira com código de registro {0} já existe", model.registro);
-                return UnprocessableEntity("Esta feira já existe.");
+                return UnprocessableEntity("Esta feira já existe");
             }
             else
             {
                 _logger.LogInformation("Tentando incluir uma feira", model);
                 _applicationServiceFeira.Add(model);
-                return Ok("Feira cadastrada com sucesso!");
+                return Ok(model);
             }
         }
         #endregion 
@@ -81,15 +86,20 @@ namespace WebAPIDDD.Presentation.Controllers
         /// <returns>As feiras que foram encontradas com aquele nome </returns>
         /// <response code="200">Retorna as feiras encontradas</response>
         /// <response code="204">Nenhuma feira foi encontrada</response>
+        /// <response code="400">Requisição mal formada,verifique a mensagem de erro</response>
         /// <response code="500">Erro interno</response>
         [HttpGet]
         [Route("nome/{nome_feira}")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetNomeFeira([FromRoute] string nome_feira)
+        public ActionResult<IEnumerable<FeiraDTO>> GetNomeFeira([FromRoute] string nome_feira)
         {
+            if (nome_feira == null || nome_feira == "")
+                return BadRequest("Informe um nome de feira");
+
             IEnumerable<FeiraDTO> feiras_por_nome;
             _logger.LogInformation("Tentando buscar uma feira pelo nome da feira " + nome_feira);
 
@@ -117,20 +127,25 @@ namespace WebAPIDDD.Presentation.Controllers
         /// <param name="model">feira que será atualizada</param>
         /// <returns>As feiras que foram encontradas com aquele nome </returns>
         /// <response code="200">Retorna que a feira foi alterada</response>
+        /// <response code="400">Requisição mal formada</response>
         /// <response code="404">Nenhuma feira foi encontrada</response>
         /// <response code="500">Erro interno</response>
         [HttpPatch]
         [Route("")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult Patch([FromBody] FeiraDTO model)
+        public ActionResult Patch([FromBody] FeiraDTO model)
         {
-            if (model == null || _applicationServiceFeira.GetByRegistro(model.registro) == null)
+            if (model == null)
+                return BadRequest();
+
+            if ( _applicationServiceFeira.GetByRegistro(model.registro) == null)
             {
                 _logger.LogInformation("FeiraDTO não existe, por isto não foi alterada.");
 
                 return NotFound();
             }
+
             _logger.LogInformation("Tentando alterar a feira com código de registro " + model.registro);
 
             _applicationServiceFeira.Update(model);
@@ -148,15 +163,20 @@ namespace WebAPIDDD.Presentation.Controllers
         /// <returns>Se foi deletado</returns>
         /// <response code="202">Ok</response>
         /// <response code="204">Nenhuma feira foi encontrada</response>
+        /// <response code="400">Requisição mal formada</response>
         /// <response code="500">Erro interno</response>
         [HttpDelete]
         [Route("{registro}")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Delete([FromRoute] string registro)
+        public ActionResult Delete([FromRoute] string registro)
         {
+            if (registro == null || registro == "")
+                return BadRequest();
+
             _logger.LogInformation("Tentando deletar a feira com código de registro " + registro);
             FeiraDTO obj = _applicationServiceFeira.GetByRegistro(registro);
             if (obj != null)
