@@ -6,7 +6,6 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
-EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
@@ -18,7 +17,6 @@ COPY ["DDDWebAPI.Infrastruture.CrossCutting.IOC/DDDWebAPI.Infrastruture.CrossCut
 COPY ["DDDWebAPI.Domain.Services/DDDWebAPI.Domain.Services.csproj", "DDDWebAPI.Domain.Services/"]
 COPY ["DDDWebAPI.Infrastruture.Repository/DDDWebAPI.Infrastruture.Repository.csproj", "DDDWebAPI.Infrastruture.Repository/"]
 COPY ["DDDWebAPI.Infrastructure.Data/DDDWebAPI.Infrastructure.Data.csproj", "DDDWebAPI.Infrastructure.Data/"]
-COPY ["DDDWebAPI.Infrastructure.Data/dump.json", "WebAPIDDD.Presentation/"]
 COPY ["DDDWebAPI.Application/DDDWebAPI.Application.csproj", "DDDWebAPI.Application/"]
 COPY ["DDDWebAPI.Infrastruture.CrossCutting.Adapter/DDDWebAPI.Infrastruture.CrossCutting.Adapter.csproj", "DDDWebAPI.Infrastruture.CrossCutting.Adapter/"]
 RUN dotnet restore "WebAPIDDD.Presentation/WebAPIDDD.Presentation.csproj"

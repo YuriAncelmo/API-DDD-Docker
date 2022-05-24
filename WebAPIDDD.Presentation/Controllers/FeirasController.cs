@@ -2,6 +2,8 @@
 using DDDWebAPI.Application.Interfaces;
 using DDDWebAPI.Application.DTO.DTO;
 using Microsoft.AspNetCore.Diagnostics;
+using DDDWebAPI.Domain.Models;
+using Newtonsoft.Json;
 
 namespace WebAPIDDD.Presentation.Controllers
 {
@@ -15,6 +17,25 @@ namespace WebAPIDDD.Presentation.Controllers
             _applicationServiceFeira = ApplicationServiceFeira;
             _logger = logger;
 
+            //Init database
+            if (_applicationServiceFeira.GetAll().Count() == 0)
+                PopulateTable();
+
+        }
+
+        private void PopulateTable()
+        {
+            string content = System.IO.File.ReadAllText("dump.json");
+            if (content != null)
+            {
+                FeiraDTO[] feiras = JsonConvert.DeserializeObject<FeiraDTO[]>(content);
+                foreach (FeiraDTO feira in feiras)
+                {
+                    if (feira != null)
+                        if (_applicationServiceFeira.GetByRegistro(feira.registro) == null)
+                            _applicationServiceFeira.Add(feira);
+                }
+            }
         }
         #region Inserir
         /// <summary>

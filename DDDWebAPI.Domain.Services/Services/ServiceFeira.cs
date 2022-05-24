@@ -24,5 +24,6 @@ namespace DDDWebAPI.Domain.Services.Services
         {
             return _repositoryFeira.GetByRegistro(registro);
         }
+        
     }
 }

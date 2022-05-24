@@ -19,21 +19,8 @@ namespace DDDWebAPI.Infrastructure.Data
                 var databaseCreator = (Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator);
                 databaseCreator.EnsureCreated();
                 databaseCreator.CreateTables();
-                populateTables();
-
             }
             catch { }
-        }
-
-        private void populateTables()
-        {
-            string content = File.ReadAllText("dump.json");
-            if (content != null)
-            {
-                Feira[] feiras = JsonConvert.DeserializeObject<Feira[]>(content);
-                Feiras.AddRange(feiras);
-                SaveChanges();
-            }
         }
 
         #endregion

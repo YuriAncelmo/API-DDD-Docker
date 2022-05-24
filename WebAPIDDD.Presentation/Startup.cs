@@ -63,14 +63,6 @@ namespace WebAPIDDD.Presentation
                     optionsBuilder.UseMySQL(connString);
                 });
 
-                //services.AddMvc();
-                //services.AddMemoryCache();
-
-                //services.AddScoped<IApplicationServiceFeira, ApplicationServiceFeira>();
-                //services.AddScoped<IServiceFeira, ServiceFeira>();
-                //services.AddScoped<IRepositoryFeira, RepositoryFeira>();
-                //services.AddScoped<IMapperFeira, MapperFeira>();
-
                 services.AddSwaggerGen(c =>
                 {
                     c.SwaggerDoc("v1", new OpenApiInfo

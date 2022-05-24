@@ -1,6 +1,7 @@
 ﻿using DDDWebAPI.Domain.Core.Interfaces.Repositorys;
 using DDDWebAPI.Domain.Models;
 using DDDWebAPI.Infrastructure.Data;
+using System.Reflection;
 
 namespace DDDWebAPI.Infrastruture.Repository.Repositorys
 {
@@ -24,9 +25,49 @@ namespace DDDWebAPI.Infrastruture.Repository.Repositorys
         public override void Add(Feira feira)
         {
             //base.Add(obj);
-            _context.Add(feira);
+            feira = Unulliffy(feira);
+            if(feira != null)
+              _context.Add(feira);
             _context.SaveChanges();
         }
+
+        private Feira Unulliffy(Feira feira)
+        {
+            if (feira.areap == null)
+                feira.areap = "";
+            if (feira.bairro == null)
+                feira.bairro = "";
+            if (feira.coddist == null)
+                feira.coddist = "";
+            if (feira.codsubpref == null)
+                feira.codsubpref = "";
+            if (feira.distrito == null)
+                feira.distrito = "";
+            if (feira.id == null)
+                feira.id = "";
+            if (feira.latitude == null)
+                feira.latitude = "";
+            if (feira.logradouro == null)
+                feira.logradouro = "";
+            if (feira.longitude == null)
+                feira.longitude = "";
+            if (feira.nome_feira == null)
+                feira.nome_feira = "";
+            if (feira.numero == null)
+                feira.numero = "";
+            if (feira.referencia == null)
+                feira.referencia = "";
+            if (feira.regiao5 == null)
+                feira.regiao5 = "";
+            if (feira.regiao8 == null)
+                feira.regiao8 = "";
+            if (feira.setcens == null)
+                feira.setcens = "";
+            if (feira.subprefe == null)
+                feira.subprefe = "";
+            return feira;
+        }
+
         public override void Update(Feira feira)
         {
             //TODO: base.Update(feira);Não sei por que não funciona

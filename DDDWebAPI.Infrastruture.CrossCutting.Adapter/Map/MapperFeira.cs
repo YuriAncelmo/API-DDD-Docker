@@ -97,6 +97,7 @@ namespace DDDWebAPI.Infrastruture.CrossCutting.Adapter.Map
                 longitude = feira.longitude,
                 nome_feira = feira.nome_feira,
                 registro = feira.registro,
+
                 referencia = feira.referencia,
                 regiao5 = feira.regiao5,
                 regiao8 = feira.regiao8,
