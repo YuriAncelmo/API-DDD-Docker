@@ -4,16 +4,9 @@ using static System.Net.Mime.MediaTypeNames;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using DDDWebAPI.Infrastructure.Data;
-using DDDWebAPI.Application.Interfaces;
-using DDDWebAPI.Application.Services;
-using DDDWebAPI.Domain.Services.Services;
-using DDDWebAPI.Domain.Core.Interfaces.Services;
-using DDDWebAPI.Infrastruture.Repository.Repositorys;
-using DDDWebAPI.Domain.Core.Interfaces.Repositorys;
-using DDDWebAPI.Infrastruture.CrossCutting.Adapter.Map;
-using DDDWebAPI.Infrastruture.CrossCutting.Adapter.Interfaces;
 using Autofac;
 using DDDWebAPI.Infrastruture.CrossCutting.IOC;
+using System.Reflection;
 
 namespace WebAPIDDD.Presentation
 {
@@ -29,61 +22,58 @@ namespace WebAPIDDD.Presentation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            try
+            
+            var host = Configuration["DBHOST"] ?? "localhost";
+            var port = Configuration["DBPORT"] ?? "3306";
+            var password = Configuration["MYSQL_PASSWORD"] ?? Configuration.GetConnectionString("MYSQL_PASSWORD");
+            var userid = Configuration["MYSQL_USER"] ?? Configuration.GetConnectionString("MYSQL_USER");
+            var usersDataBase = Configuration["MYSQL_DATABASE"] ?? Configuration.GetConnectionString("MYSQL_DATABASE");
+
+            string connString = $"server={host}; userid={userid};pwd={password};port={port};database={usersDataBase}";
+
+            services.AddDbContext<MySqlContext>(optionsBuilder =>
             {
-                services.AddControllers(options =>
+                optionsBuilder.UseMySQL(connString);
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                //Filter Exceptions 
-                //options.Filters.Add<HttpResponseExceptionFilter>();//TODO: Colocar para mapear as exceptions
-
-                 })
-                .ConfigureApiBehaviorOptions(options =>// Configura comportamento da API quando tem problemas relacionados ao modelo 
-                {
-                    options.InvalidModelStateResponseFactory = context =>
-                        new BadRequestObjectResult(context.ModelState)
-                        {
-                            ContentTypes =
-                            {
-                            Application.Json,
-                            }
-                        };
-                    options.ClientErrorMapping[StatusCodes.Status404NotFound].Title = "Não encontrado";
-                });
-
-                var host = Configuration["DBHOST"] ?? "localhost";
-                var port = Configuration["DBPORT"] ?? "3306";
-                var password = Configuration["MYSQL_PASSWORD"] ?? Configuration.GetConnectionString("MYSQL_PASSWORD");
-                var userid = Configuration["MYSQL_USER"] ?? Configuration.GetConnectionString("MYSQL_USER");
-                var usersDataBase = Configuration["MYSQL_DATABASE"] ?? Configuration.GetConnectionString("MYSQL_DATABASE");
-
-                string connString = $"server={host}; userid={userid};pwd={password};port={port};database={usersDataBase}";
-
-                services.AddDbContext<MySqlContext>(optionsBuilder =>
-                {
-                    optionsBuilder.UseMySQL(connString);
-                });
-
-                services.AddSwaggerGen(c =>
-                {
-                    c.SwaggerDoc("v1", new OpenApiInfo
+                    Version = "v1",
+                    Title = "Desafio de construção de API - Unico",
+                    Description = "Construir uma API que trabalhe os dados de feiras livres em um banco de dados",
+                    Contact = new OpenApiContact
                     {
-                        Version = "v1",
-                        Title = "Desafio de construção de API - Unico",
-                        Description = "Construir uma API que trabalhe os dados de feiras livres em um banco de dados",
-                        Contact = new OpenApiContact
-                        {
-                            Name = "Yuri Gabriel Correa Ancelmo",
-                            Url = new Uri("https://www.linkedin.com/in/yuri-ancelmo/")
-                        }
-                    });
+                        Name = "Yuri Gabriel Correa Ancelmo",
+                        Url = new Uri("https://www.linkedin.com/in/yuri-ancelmo/")
+                    }
                 });
-            }catch { throw; }
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+            services.AddControllers()
+            .ConfigureApiBehaviorOptions(options =>// Configura comportamento da API quando tem problemas relacionados ao modelo 
+            {
+                options.InvalidModelStateResponseFactory = context =>
+                    new BadRequestObjectResult(context.ModelState)
+                    {
+                        ContentTypes =
+                        {
+                            Application.Json,
+                        }
+                    };
+                options.ClientErrorMapping[StatusCodes.Status404NotFound].Title = "Não encontrado";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            //Local onde será gravado os logs 
+            //Where the logs is located 
             loggerFactory.AddFile("Logs/API-{Date}.txt");
             try
             {
@@ -96,8 +86,8 @@ namespace WebAPIDDD.Presentation
                         {
                             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-                        // using static System.Net.Mime.MediaTypeNames;
-                        context.Response.ContentType = Text.Plain;
+                            // using static System.Net.Mime.MediaTypeNames;
+                            context.Response.ContentType = Text.Plain;
 
                             await context.Response.WriteAsync("Ocorreu um erro inesperado.");
 
@@ -109,10 +99,7 @@ namespace WebAPIDDD.Presentation
                             {
                                 await context.Response.WriteAsync(exe.Message);
                             }
-                            if (exceptionHandlerPathFeature?.Path == "/")
-                            {
-                                await context.Response.WriteAsync(" Page: Home.");
-                            }
+
                         });
                     });
 
@@ -134,9 +121,9 @@ namespace WebAPIDDD.Presentation
                     endpoints.MapControllers();
                 });
             }
-            catch (Exception) { throw ; }
+            catch (Exception) { throw; }
         }
-        public void ConfigureContainer(ContainerBuilder Builder) 
+        public void ConfigureContainer(ContainerBuilder Builder)
         {
             Builder.RegisterModule(new ModuleIOC());
         }

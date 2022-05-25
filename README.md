@@ -8,7 +8,9 @@ Primeiro de tudo, vamos preparar o ambiente.
 
 ### Docker
 
-Faça a instalação do Docker Desktop para preparação do ambiente. Certifique-se de parar serviços do MySQL antes que execute estes comandos:
+Faça a instalação do Docker Desktop, e execute-o para preparação do ambiente. 
+Certifique-se de parar serviços do MySQL. 
+Execute este comandos:
 
 ```sh
 docker-compose up
@@ -42,3 +44,4 @@ https://dev.to/gbengelebs/how-to-containerize-an-asp-netcore-api-and-mysql-with-
 https://medium.com/beelabacademy/implementando-na-prática-rest-api-com-conceitos-de-ddd-net-core-sql-no-docker-ioc-2cb3a2e7c649
 https://docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/testing?view=aspnetcore-6.0
 https://dotnetcoretutorials.com/2018/05/12/the-testing-context/
+https://code-maze.com/swagger-ui-asp-net-core-web-api/
