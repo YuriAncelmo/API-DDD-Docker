@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31808.319
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teste_FeiraLivre", "Teste_FeiraLivre\Teste_FeiraLivre.csproj", "{A19EAE69-60E6-4899-A864-8EAD62F22CF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDWebAPI.Tests", "DDDWebAPI.Tests\DDDWebAPI.Tests.csproj", "{A19EAE69-60E6-4899-A864-8EAD62F22CF6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.0 - Presentation", "1.0 - Presentation", "{22F8BCAB-2A18-48E3-91A0-61875986DCC1}"
 EndProject
@@ -35,9 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDWebAPI.Infrastruture.Cro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDWebAPI.Infrastruture.CrossCutting.IOC", "DDDWebAPI.Infrastruture.CrossCutting.IOC\DDDWebAPI.Infrastruture.CrossCutting.IOC.csproj", "{1CC58447-C788-4438-90E2-60FFADE64C51}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPIDDD.Presentation", "WebAPIDDD.Presentation\WebAPIDDD.Presentation.csproj", "{7EF5F2C6-833F-496D-BFFA-832788111BDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDDWebAPI.Presentation", "DDDWebAPI.Presentation\DDDWebAPI.Presentation.csproj", "{7EF5F2C6-833F-496D-BFFA-832788111BDC}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{45BAD7DD-AE90-4FA2-8A74-8C161A9C6E8E}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{672A9FA4-53F2-4F57-9B20-BBC46D5A0AD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,10 +89,10 @@ Global
 		{7EF5F2C6-833F-496D-BFFA-832788111BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EF5F2C6-833F-496D-BFFA-832788111BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EF5F2C6-833F-496D-BFFA-832788111BDC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{45BAD7DD-AE90-4FA2-8A74-8C161A9C6E8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45BAD7DD-AE90-4FA2-8A74-8C161A9C6E8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45BAD7DD-AE90-4FA2-8A74-8C161A9C6E8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45BAD7DD-AE90-4FA2-8A74-8C161A9C6E8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{672A9FA4-53F2-4F57-9B20-BBC46D5A0AD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{672A9FA4-53F2-4F57-9B20-BBC46D5A0AD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{672A9FA4-53F2-4F57-9B20-BBC46D5A0AD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{672A9FA4-53F2-4F57-9B20-BBC46D5A0AD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

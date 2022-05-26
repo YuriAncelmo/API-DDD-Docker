@@ -3,7 +3,6 @@ using DDDWebAPI.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using Newtonsoft.Json;
 
 namespace DDDWebAPI.Infrastructure.Data
 {
@@ -17,8 +16,10 @@ namespace DDDWebAPI.Infrastructure.Data
             try
             {
                 var databaseCreator = (Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator);
-                databaseCreator.EnsureCreated();
-                databaseCreator.CreateTables();
+                if (databaseCreator.Exists())
+                    databaseCreator.EnsureCreated();
+                if (!databaseCreator.HasTables())
+                    databaseCreator.CreateTables();
             }
             catch { }
         }

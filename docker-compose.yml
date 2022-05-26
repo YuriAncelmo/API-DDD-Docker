@@ -4,7 +4,6 @@ services:
   database:
     #Pull the latest mysql image
     image: mysql:8.0.22
-    container_name: mysql_container
     #Map port 3306 on the mysql container to port 3306 in the host
     ports:
       - "3306:3306"
@@ -15,11 +14,11 @@ services:
       MYSQL_USER: yuri_ancelmo
       MYSQL_PASSWORD: admin123
       MYSQL_DATABASE: UnicoDatabase
-  webapiddd.presentation:
-    image: ${DOCKER_REGISTRY-}webapidddpresentation
+  dddwebapi.presentation:
+    image: ${DOCKER_REGISTRY-}dddwebapipresentation
     build:
       context: .
-      dockerfile: WebAPIDDD.Presentation\Dockerfile
+      dockerfile: DDDWebAPI.Presentation\Dockerfile
     #This Service Depends on the database service specifed above
     depends_on: 
       - database
@@ -31,3 +30,4 @@ services:
     environment: 
       - DBHOST=database
       - ASPNETCORE_ENVIRONMENT=Development
+
