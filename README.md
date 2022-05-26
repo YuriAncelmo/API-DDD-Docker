@@ -14,10 +14,14 @@ Execute o Docker.
 Certifique-se de parar serviços do MySQL. 
 
 ### .Net Framework
-É necessário para compilar o projeto.
+É necessário a versão 6 para rodar o projeto.
 
 ## Como rodar o projeto
-Execute este o arquivo na raiz deste projeto  "deploy.cmd".
+Abra a solução, no arquivo API_FeirasLivresSP.sln. Abra o gerenciador de solução, clique com botão direito em docker-compose, selecione "Definir como Projeto de Inicialização".
+
+Um pouco acima, no botão de play, pressione o botão "Docker compose"
+
+Ainda não encontrei uma forma de configurar os arquivos do Docker, para que a aplicação seja executada pelo comando docker-compose up
 
 ### Uso
 Após subir a aplicação para o Docker, a documentação está disponível no Swagger em https://localhost:5000/index.html, com exemplos de requisição.
