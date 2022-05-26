@@ -3,10 +3,10 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Windows</DockerTargetOS>
-    <ProjectGuid>45bad7dd-ae90-4fa2-8a74-8c161a9c6e8e</ProjectGuid>
+    <ProjectGuid>672a9fa4-53f2-4f57-9b20-bbc46d5a0ad2</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://{ServiceIPAddress}{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>webapiddd.presentation</DockerServiceName>
+    <DockerServiceName>dddwebapi.presentation</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

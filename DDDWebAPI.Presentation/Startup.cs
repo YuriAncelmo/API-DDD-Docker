@@ -8,7 +8,7 @@ using Autofac;
 using DDDWebAPI.Infrastruture.CrossCutting.IOC;
 using System.Reflection;
 
-namespace WebAPIDDD.Presentation
+namespace DDDWebAPI.Presentation
 {
     public class Startup
     {
@@ -63,7 +63,7 @@ namespace WebAPIDDD.Presentation
                     {
                         ContentTypes =
                         {
-                            Application.Json,
+                            System.Net.Mime.MediaTypeNames.Application.Json
                         }
                     };
                 options.ClientErrorMapping[StatusCodes.Status404NotFound].Title = "Não encontrado";

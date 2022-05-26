@@ -2,7 +2,7 @@
 
 using Autofac.Extensions.DependencyInjection;
 
-namespace WebAPIDDD.Presentation
+namespace DDDWebAPI.Presentation
 {
     public class Program
     {

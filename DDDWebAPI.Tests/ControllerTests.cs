@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
-using WebAPIDDD.Presentation.Controllers;
+using DDDWebAPI.Presentation.Controllers;
 
 namespace Teste_FeiraLivre
 {

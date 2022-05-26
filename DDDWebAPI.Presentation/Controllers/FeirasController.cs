@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using DDDWebAPI.Domain.Models;
 using Newtonsoft.Json;
 
-namespace WebAPIDDD.Presentation.Controllers
+namespace DDDWebAPI.Presentation.Controllers
 {
     [Route("feira")]
     public class FeirasController : Controller

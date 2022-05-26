@@ -2,28 +2,30 @@
 
 Este projeto tem o intuito de demonstrar como é feito uma API com boas práticas, para consumir uma base de dados das feiras livres e São Paulo.
 
-## Instalação
+## Preparação 
 
-Primeiro de tudo, vamos preparar o ambiente. 
+Você deve ter o Docker Desktop e o .Net Framework 6 para executar a aplicação
 
 ### Docker
 
-Faça a instalação do Docker Desktop, e execute-o para preparação do ambiente. 
-Certifique-se de parar serviços do MySQL. 
-Execute este comandos:
+Execute o Docker.
 
-```sh
-docker-compose up
-```
+### MySQL
+Certifique-se de parar serviços do MySQL. 
+
+### .Net Framework
+É necessário para compilar o projeto.
+
+## Como rodar o projeto
+Execute este o arquivo na raiz deste projeto  "deploy.cmd".
 
 ### Uso
-
 Após subir a aplicação para o Docker, a documentação está disponível no Swagger em https://localhost:5000/index.html, com exemplos de requisição.
 
 ## Testes Unitários
 Caso você queira ver as coberturas de teste desta aplicação, execute o arquivo CoberturadeTestes.bat na raiz do projeto, ele irá gerar a cobertura de código e também o documento do resultado dos testes.
 
-Os arquivos gerados estão dentro da pasta Teste_FeiraLivre\TestResults
+Os arquivos gerados estão dentro da pasta DDDWebAPI.Tests\TestResults
 
 ## Logs 
 

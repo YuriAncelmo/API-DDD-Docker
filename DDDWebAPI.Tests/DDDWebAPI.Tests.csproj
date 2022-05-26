@@ -20,7 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DDDWebAPI.Domain.Core\DDDWebAPI.Domain.Core.csproj" />
     <ProjectReference Include="..\DDDWebAPI.Infrastructure.Data\DDDWebAPI.Infrastructure.Data.csproj" />
-    <ProjectReference Include="..\WebAPIDDD.Presentation\WebAPIDDD.Presentation.csproj" />
+    <ProjectReference Include="..\DDDWebAPI.Presentation\DDDWebAPI.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

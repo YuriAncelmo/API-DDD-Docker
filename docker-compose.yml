@@ -14,11 +14,11 @@ services:
       MYSQL_USER: yuri_ancelmo
       MYSQL_PASSWORD: admin123
       MYSQL_DATABASE: UnicoDatabase
-  webapiddd.presentation:
-    image: ${DOCKER_REGISTRY-}webapidddpresentation
+  dddwebapi.presentation:
+    image: ${DOCKER_REGISTRY-}dddwebapipresentation
     build:
       context: .
-      dockerfile: WebAPIDDD.Presentation\Dockerfile
+      dockerfile: DDDWebAPI.Presentation\Dockerfile
     #This Service Depends on the database service specifed above
     depends_on: 
       - database
@@ -30,3 +30,4 @@ services:
     environment: 
       - DBHOST=database
       - ASPNETCORE_ENVIRONMENT=Development
+

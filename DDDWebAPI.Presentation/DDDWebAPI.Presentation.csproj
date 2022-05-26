@@ -8,7 +8,7 @@
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>E:\Entrevistas\Unico-API_FeirasLivresSP\WebAPIDDD.Presentation\WebAPIDDD.Presentation.xml</DocumentationFile>
+    <DocumentationFile>..\DDDWebAPI.Presentation\DDDWebAPI.Presentation.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
