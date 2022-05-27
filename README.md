@@ -1,7 +1,11 @@
-# Teste de Codificação - Unico
+# Codificação - Unico
 
-Este projeto tem o intuito de demonstrar como é feito uma API com boas práticas, para consumir uma base de dados das feiras livres e São Paulo.
+Este projeto tem o intuito de demonstrar como é feito uma API com boas práticas, para consumir uma base de dados.
 
+##Técnologias e técnicas utilizadas 
+
+ Entity Framework, Domain Driven Design, Docker, MySQL e testes unitários de controller
+ 
 ## Preparação 
 
 Você deve ter o Docker Desktop e o .Net Framework 6 para executar a aplicação
