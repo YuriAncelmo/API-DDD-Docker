@@ -262,5 +262,10 @@ namespace DDDWebAPI.Presentation.Controllers
 
         }
         #endregion
+        protected override void Dispose(bool disposing)
+        {
+            _applicationServiceCategoria.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }
