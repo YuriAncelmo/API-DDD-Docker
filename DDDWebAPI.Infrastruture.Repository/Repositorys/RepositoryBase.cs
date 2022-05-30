@@ -1,68 +1,58 @@
 ﻿using DDDWebAPI.Domain.Core.Interfaces.Repositorys;
 using DDDWebAPI.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace DDDWebAPI.Infrastruture.Repository.Repositorys
 {
-    public abstract class RepositoryBase<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : class
+    public abstract class RepositoryBase<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : Domain.Models.Base
     {
         private readonly MySqlContext _context;
-
+        private DbSet<TEntity> entities;
         public RepositoryBase(MySqlContext Context)
         {
             _context = Context;
+            entities = _context.Set<TEntity>();
         }
-
-        public virtual void Add(TEntity obj)
+        string errorMessage = string.Empty;
+        
+        public IEnumerable<TEntity> GetAll()
         {
-            //_context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Detached;//Liberar a entidade
-            _context.Set<TEntity>().Add(obj);
+            return entities.AsEnumerable();
+        }
+        public TEntity GetById(int id)
+        {
+            return entities.SingleOrDefault(s => s.id == id);
+        }
+        public void Add(TEntity entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            entities.Add(entity);
             _context.SaveChanges();
         }
-
-        public virtual TEntity GetById(int id)
+        public virtual void Update(TEntity entity)
         {
-            return _context.Set<TEntity>().Find(id);
-        }
-
-        public virtual IEnumerable<TEntity> GetAll()
-        {
-            return _context.Set<TEntity>().ToList();
-        }
-
-        public virtual void Update(TEntity obj)
-        {
-
-            try
+            if (entity == null)
             {
-                _context.Entry(obj).State = EntityState.Modified;
-                _context.SaveChanges();
-
+                throw new ArgumentNullException("entity");
             }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-
-
-        }
-
-        public virtual void Remove(TEntity obj)
-        {
-            _context.Remove<TEntity>(obj);
             _context.SaveChanges();
         }
-
+        public void Remove(TEntity entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            entities.Remove(entity);
+            _context.SaveChanges();
+        }
         public virtual void Dispose()
         {
             _context.Dispose();
         }
-
-
     }
 
 }

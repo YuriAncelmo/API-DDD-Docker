@@ -22,52 +22,8 @@ namespace DDDWebAPI.Infrastruture.Repository.Repositorys
         {
             return _context.Feiras.Where(feira => feira.registro == registro).FirstOrDefault();
         }
-        public override void Add(Feira feira)
-        {
-            //base.Add(obj);
-            feira = Unulliffy(feira);
-            if(feira != null)
-              _context.Add(feira);
-            _context.SaveChanges();
-        }
-
-        private Feira Unulliffy(Feira feira)
-        {
-            if (feira.areap == null)
-                feira.areap = "";
-            if (feira.bairro == null)
-                feira.bairro = "";
-            if (feira.coddist == null)
-                feira.coddist = "";
-            if (feira.codsubpref == null)
-                feira.codsubpref = "";
-            if (feira.distrito == null)
-                feira.distrito = "";
-            if (feira.id == null)
-                feira.id = "";
-            if (feira.latitude == null)
-                feira.latitude = "";
-            if (feira.logradouro == null)
-                feira.logradouro = "";
-            if (feira.longitude == null)
-                feira.longitude = "";
-            if (feira.nome_feira == null)
-                feira.nome_feira = "";
-            if (feira.numero == null)
-                feira.numero = "";
-            if (feira.referencia == null)
-                feira.referencia = "";
-            if (feira.regiao5 == null)
-                feira.regiao5 = "";
-            if (feira.regiao8 == null)
-                feira.regiao8 = "";
-            if (feira.setcens == null)
-                feira.setcens = "";
-            if (feira.subprefe == null)
-                feira.subprefe = "";
-            return feira;
-        }
-
+       
+        
         public override void Update(Feira feira)
         {
             //TODO: base.Update(feira);Não sei por que não funciona
@@ -104,14 +60,6 @@ namespace DDDWebAPI.Infrastruture.Repository.Repositorys
                 _context.SaveChanges();
             }
             catch (Exception) { throw; }
-        }
-        public override void Remove(Feira feira)
-        {
-            //base.Remove(obj);
-            _context.Feiras.Attach(feira);
-            _context.Feiras.Remove(feira);
-            _context.SaveChanges();
-            _context.Entry(feira).State = Microsoft.EntityFrameworkCore.EntityState.Detached;//Necessário pois foi feito uma operação de inserção e depois remoção na sequencia
         }
     }
 }
